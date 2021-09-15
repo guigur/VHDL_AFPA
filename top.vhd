@@ -23,68 +23,97 @@ use ieee.numeric_std.all;
 
 entity TOP is
 		port (
-				sw		: in std_logic_vector(7 downto 0);
-				seg	: out std_logic_vector(7 downto 0); --Array of the 7 digits
-				an		: out std_logic_vector(3 downto 0); --Array of the 4 anodes
-				clk 	: in std_logic;
-				btnd	: in std_logic;
-				Led	: out std_logic
+				sw				: in std_logic_vector(7 downto 0);
+				seg			: out std_logic_vector(7 downto 0); --Array of the 7 digits
+				an				: out std_logic_vector(3 downto 0); --Array of the 4 anodes
+				clk 			: in std_logic;
+				btnu, btnd	: in std_logic;
+				btnr			: in std_logic;
+				Led			: out std_logic_vector(1 downto 0)
 		);
 end TOP;
 
 architecture Behavioral of TOP is
-		COMPONENT SEG_DECODER 
+		COMPONENT SEG_DECODER
 				PORT (
 					sw		: in std_logic_vector(7 downto 0);
 					seg	: out std_logic_vector(7 downto 0); --Array of the 7 digits
 					an		: out std_logic_vector(3 downto 0) --Array of the 4 anodes
 				);
 		END COMPONENT;
-		COMPONENT T_LATCH 
+		COMPONENT SEG_DECODER_DEC
 				PORT (
-					T, CLK : in  STD_LOGIC;
-					S : out  STD_LOGIC
+					val	: in std_logic_vector(15 downto 0);
+					dis	: in std_logic_vector(1 downto 0);
+					seg	: out std_logic_vector(7 downto 0); --Array of the 7 digits
+					an		: out std_logic_vector(3 downto 0) --Array of the 4 anodes
 				);
 		END COMPONENT;
-		signal T1_INTERNAL : std_logic;
-		signal T2_INTERNAL : std_logic;
-		signal T3_INTERNAL : std_logic;
-		signal T4_INTERNAL : std_logic;
-		signal T5_INTERNAL : std_logic;
-		signal T6_INTERNAL : std_logic;
-		signal T7_INTERNAL : std_logic;
-		signal T8_INTERNAL : std_logic;
-		signal T9_INTERNAL : std_logic;
-		signal T10_INTERNAL : std_logic;
-		signal T11_INTERNAL : std_logic;
+--		COMPONENT D_LATCH 
+--				PORT (
+--						D, CLK	: in  STD_LOGIC;
+--						S 			: out  STD_LOGIC
+--				);
+--		END COMPONENT;
+--		COMPONENT T_LATCH 
+--				PORT (
+--						T, CLK	: in  STD_LOGIC;
+--						S 		 	: out	STD_LOGIC
+--				);
+--		END COMPONENT;	
+		COMPONENT CLOCK_DIV 
+				Port ( RST, CLK	: in		STD_LOGIC;
+						 SPEED		: in		INTEGER RANGE 0 TO 100000000;
+						 S				: out  	STD_LOGIC
+			);
+		END COMPONENT;
+		COMPONENT TWO_BITS_COUNTER 
+				Port ( 
+						E, CLK 	: in 	std_logic;
+						S			: out std_logic_vector(1 downto 0)
+				);
+		END COMPONENT;
+		COMPONENT BCD_COUNTER 
+				PORT(
+						CLK, INC	: IN 	STD_LOGIC;
+						S			: OUT	STD_LOGIC_VECTOR(15 DOWNTO 0)
+				);
+		END COMPONENT;
+		COMPONENT SPEED_BUTTONS is
+		PORT(
+				CLK 						: in  STD_LOGIC;
+				TRIG_UP, TRIG_DOWN	: in	STD_LOGIC;
+				SPEED		: inout	INTEGER RANGE 0 TO 100000000
+		);
+		END COMPONENT;
+		
+		SIGNAL CLK_DIV_INTERNAL : std_logic;
+		SIGNAL DIGIT_COUNTER_INTERNAL : std_logic;
 
+		SIGNAL COUNT_INTERNAL : std_logic_vector(1 downto 0);
+		SIGNAL DIGITS_VAL_INTERNAL : STD_LOGIC_VECTOR(15 DOWNTO 0);
 		begin
-			decoder1: SEG_DECODER
-					port map(sw, seg, an);
-			dlatch1: T_LATCH
-					port map(T=>btnd, clk=>clk, S=>T1_INTERNAL);
-			dlatch2: T_LATCH
-					port map(T=>T1_INTERNAL, clk=>clk, S=>T2_INTERNAL);
-			dlatch3: T_LATCH
-					port map(T=>T2_INTERNAL, clk=>clk, S=>T3_INTERNAL);
-			dlatch4: T_LATCH
-					port map(T=>T3_INTERNAL, clk=>clk, S=>T4_INTERNAL);	
-			dlatch5: T_LATCH
-					port map(T=>T4_INTERNAL, clk=>clk, S=>T5_INTERNAL);	
-			dlatch6: T_LATCH
-					port map(T=>T5_INTERNAL, clk=>clk, S=>T6_INTERNAL);	
-			dlatch7: T_LATCH
-					port map(T=>T6_INTERNAL, clk=>clk, S=>T7_INTERNAL);	
-			dlatch8: T_LATCH
-					port map(T=>T7_INTERNAL, clk=>clk, S=>T8_INTERNAL);	
-			dlatch9: T_LATCH
-					port map(T=>T8_INTERNAL, clk=>clk, S=>T9_INTERNAL);	
-			dlatch10: T_LATCH
-					port map(T=>T9_INTERNAL, clk=>clk, S=>T10_INTERNAL);	
-			dlatch11: T_LATCH
-					port map(T=>T10_INTERNAL, clk=>clk, S=>T11_INTERNAL);	
-			dlatch12: T_LATCH
-					port map(T=>T11_INTERNAL, clk=>clk, S=>Led);	
+		
+
+			clockdiv1: CLOCK_DIV
+					port map(RST=>btnr, CLK=>CLK, SPEED=>99999, S=>CLK_DIV_INTERNAL);
+
+			tbc1: TWO_BITS_COUNTER
+					port map(E=>CLK_DIV_INTERNAL, CLK=>CLK, S=>COUNT_INTERNAL);
+
+			count_speed: CLOCK_DIV
+					port map(RST=>btnr, CLK=>CLK, SPEED=>9999999, S=>DIGIT_COUNTER_INTERNAL);
+
+			bcd1: BCD_COUNTER
+					port map(CLK=>CLK, INC=>DIGIT_COUNTER_INTERNAL, S=>DIGITS_VAL_INTERNAL);
+					
+			decoder1: SEG_DECODER_DEC
+					port map(val=>DIGITS_VAL_INTERNAL, dis=>COUNT_INTERNAL, seg=>seg, an=>an);
+					
+			Led <= COUNT_INTERNAL;
+
+			--Ledtwo <= CLK_DIV_INTERNAL;
+
 end Behavioral;
 
 

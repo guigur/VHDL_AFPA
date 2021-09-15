@@ -1,0 +1,10 @@
+#-----------------------------------------------------------
+# PlanAhead v14.7 (64-bit)
+# Build 321239 by xbuild on Fri Sep 27 19:24:36 MDT 2013
+# Start of session at: Wed Sep 15 11:32:40 2021
+# Process ID: 25633
+# Log file: /home/stetd/Documents/github/VHDL_AFPA/planAhead_run_2/planAhead.log
+# Journal file: /home/stetd/Documents/github/VHDL_AFPA/planAhead_run_2/planAhead.jou
+#-----------------------------------------------------------
+start_gui
+source /home/stetd/Documents/github/VHDL_AFPA/pa.fromNetlist.tcl

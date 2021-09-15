@@ -1,3 +1,5 @@
-vhdl work "T_LATCH.vhd"
-vhdl work "seg_decoder.vhd"
+vhdl work "seg_decoder_dec.vhd"
+vhdl work "MUX_1_TO_4.vhd"
+vhdl work "CLOCK_DIV.vhd"
+vhdl work "BCD_COUNTER.vhd"
 vhdl work "top.vhd"

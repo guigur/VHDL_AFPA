@@ -5,14 +5,14 @@ Parameter TMPDIR set to xst/projnav.tmp
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.06 secs
+Total CPU time to Xst completion: 0.05 secs
  
 --> 
 Parameter xsthdpdir set to xst
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.06 secs
+Total CPU time to Xst completion: 0.05 secs
  
 --> 
 Reading design: TOP.prj
@@ -108,13 +108,19 @@ Slice Utilization Ratio Delta      : 5
 =========================================================================
 *                          HDL Parsing                                  *
 =========================================================================
-Parsing VHDL file "/home/stetd/first-test/T_LATCH.vhd" into library work
-Parsing entity <T_LATCH>.
-Parsing architecture <Behavioral> of entity <t_latch>.
-Parsing VHDL file "/home/stetd/first-test/seg_decoder.vhd" into library work
-Parsing entity <SEG_DECODER>.
-Parsing architecture <Behavioral> of entity <seg_decoder>.
-Parsing VHDL file "/home/stetd/first-test/top.vhd" into library work
+Parsing VHDL file "/home/stetd/Documents/github/VHDL_AFPA/seg_decoder_dec.vhd" into library work
+Parsing entity <SEG_DECODER_DEC>.
+Parsing architecture <Behavioral> of entity <seg_decoder_dec>.
+Parsing VHDL file "/home/stetd/Documents/github/VHDL_AFPA/MUX_1_TO_4.vhd" into library work
+Parsing entity <TWO_BITS_COUNTER>.
+Parsing architecture <Behavioral> of entity <two_bits_counter>.
+Parsing VHDL file "/home/stetd/Documents/github/VHDL_AFPA/CLOCK_DIV.vhd" into library work
+Parsing entity <CLOCK_DIV>.
+Parsing architecture <Behavioral> of entity <clock_div>.
+Parsing VHDL file "/home/stetd/Documents/github/VHDL_AFPA/BCD_COUNTER.vhd" into library work
+Parsing entity <BCD_COUNTER>.
+Parsing architecture <Behavioral> of entity <bcd_counter>.
+Parsing VHDL file "/home/stetd/Documents/github/VHDL_AFPA/top.vhd" into library work
 Parsing entity <TOP>.
 Parsing architecture <Behavioral> of entity <top>.
 
@@ -124,42 +130,104 @@ Parsing architecture <Behavioral> of entity <top>.
 
 Elaborating entity <TOP> (architecture <Behavioral>) from library <work>.
 
-Elaborating entity <SEG_DECODER> (architecture <Behavioral>) from library <work>.
+Elaborating entity <CLOCK_DIV> (architecture <Behavioral>) from library <work>.
+WARNING:HDLCompiler:439 - "/home/stetd/Documents/github/VHDL_AFPA/top.vhd" Line 73: Formal port s of mode inout cannot be associated with actual port s of mode out
+INFO:HDLCompiler:1408 - "/home/stetd/Documents/github/VHDL_AFPA/MUX_1_TO_4.vhd" Line 37. s is declared here
 
-Elaborating entity <T_LATCH> (architecture <Behavioral>) from library <work>.
+Elaborating entity <TWO_BITS_COUNTER> (architecture <Behavioral>) from library <work>.
+INFO:HDLCompiler:1408 - "/home/stetd/Documents/github/VHDL_AFPA/MUX_1_TO_4.vhd" Line 37. s is declared here
+
+Elaborating entity <BCD_COUNTER> (architecture <Behavioral>) from library <work>.
+
+Elaborating entity <SEG_DECODER_DEC> (architecture <Behavioral>) from library <work>.
 
 =========================================================================
 *                           HDL Synthesis                               *
 =========================================================================
 
 Synthesizing Unit <TOP>.
-    Related source file is "/home/stetd/first-test/top.vhd".
+    Related source file is "/home/stetd/Documents/github/VHDL_AFPA/top.vhd".
+WARNING:Xst:647 - Input <sw> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <btnu> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <btnd> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
     Summary:
 	no macro.
 Unit <TOP> synthesized.
 
-Synthesizing Unit <SEG_DECODER>.
-    Related source file is "/home/stetd/first-test/seg_decoder.vhd".
-    Found 256x8-bit Read Only RAM for signal <seg>
+Synthesizing Unit <CLOCK_DIV>.
+    Related source file is "/home/stetd/Documents/github/VHDL_AFPA/CLOCK_DIV.vhd".
+    Found 1-bit register for signal <TMP>.
+    Found 27-bit register for signal <COUNT>.
+    Found 27-bit adder for signal <COUNT[26]_GND_5_o_add_1_OUT> created at line 47.
+    Found 27-bit comparator lessequal for signal <n0000> created at line 42
     Summary:
-	inferred   1 RAM(s).
-Unit <SEG_DECODER> synthesized.
+	inferred   1 Adder/Subtractor(s).
+	inferred  28 D-type flip-flop(s).
+	inferred   1 Comparator(s).
+	inferred   1 Multiplexer(s).
+Unit <CLOCK_DIV> synthesized.
 
-Synthesizing Unit <T_LATCH>.
-    Related source file is "/home/stetd/first-test/T_LATCH.vhd".
-    Found 1-bit register for signal <S_INTERNAL>.
+Synthesizing Unit <TWO_BITS_COUNTER>.
+    Related source file is "/home/stetd/Documents/github/VHDL_AFPA/MUX_1_TO_4.vhd".
+    Found 2-bit register for signal <S>.
+    Found 2-bit adder for signal <S[1]_GND_25_o_add_0_OUT> created at line 48.
     Summary:
-	inferred   1 D-type flip-flop(s).
-Unit <T_LATCH> synthesized.
+	inferred   1 Adder/Subtractor(s).
+	inferred   2 D-type flip-flop(s).
+Unit <TWO_BITS_COUNTER> synthesized.
+
+Synthesizing Unit <BCD_COUNTER>.
+    Related source file is "/home/stetd/Documents/github/VHDL_AFPA/BCD_COUNTER.vhd".
+    Found 16-bit register for signal <S>.
+    Found 16-bit register for signal <DIGITS>.
+    Found 4-bit adder for signal <DIGITS[3]_GND_39_o_add_0_OUT> created at line 45.
+    Found 4-bit adder for signal <DIGITS[7]_GND_39_o_add_2_OUT> created at line 49.
+    Found 4-bit adder for signal <DIGITS[11]_GND_39_o_add_4_OUT> created at line 53.
+    Found 4-bit adder for signal <DIGITS[15]_GND_39_o_add_6_OUT> created at line 57.
+    Found 4-bit comparator lessequal for signal <n0001> created at line 46
+    Found 4-bit comparator lessequal for signal <n0004> created at line 50
+    Found 4-bit comparator lessequal for signal <n0007> created at line 54
+    Found 4-bit comparator lessequal for signal <n0010> created at line 58
+    Summary:
+	inferred   4 Adder/Subtractor(s).
+	inferred  32 D-type flip-flop(s).
+	inferred   4 Comparator(s).
+	inferred   3 Multiplexer(s).
+Unit <BCD_COUNTER> synthesized.
+
+Synthesizing Unit <SEG_DECODER_DEC>.
+    Related source file is "/home/stetd/Documents/github/VHDL_AFPA/seg_decoder_dec.vhd".
+    Found 4x4-bit Read Only RAM for signal <an>
+    Found 16x8-bit Read Only RAM for signal <seg>
+    Found 4-bit 4-to-1 multiplexer for signal <val_digit> created at line 42.
+    Summary:
+	inferred   2 RAM(s).
+	inferred   1 Multiplexer(s).
+Unit <SEG_DECODER_DEC> synthesized.
 
 =========================================================================
 HDL Synthesis Report
 
 Macro Statistics
-# RAMs                                                 : 1
- 256x8-bit single-port Read Only RAM                   : 1
-# Registers                                            : 12
- 1-bit register                                        : 12
+# RAMs                                                 : 2
+ 16x8-bit single-port Read Only RAM                    : 1
+ 4x4-bit single-port Read Only RAM                     : 1
+# Adders/Subtractors                                   : 7
+ 2-bit adder                                           : 1
+ 27-bit adder                                          : 2
+ 4-bit adder                                           : 4
+# Registers                                            : 7
+ 1-bit register                                        : 2
+ 16-bit register                                       : 2
+ 2-bit register                                        : 1
+ 27-bit register                                       : 2
+# Comparators                                          : 6
+ 27-bit comparator lessequal                           : 2
+ 4-bit comparator lessequal                            : 4
+# Multiplexers                                         : 6
+ 16-bit 2-to-1 multiplexer                             : 3
+ 27-bit 2-to-1 multiplexer                             : 2
+ 4-bit 4-to-1 multiplexer                              : 1
 
 =========================================================================
 
@@ -168,28 +236,59 @@ Macro Statistics
 =========================================================================
 
 
-Synthesizing (advanced) Unit <SEG_DECODER>.
+Synthesizing (advanced) Unit <CLOCK_DIV>.
+The following registers are absorbed into counter <COUNT>: 1 register on signal <COUNT>.
+Unit <CLOCK_DIV> synthesized (advanced).
+
+Synthesizing (advanced) Unit <SEG_DECODER_DEC>.
+INFO:Xst:3218 - HDL ADVISOR - The RAM <Mram_an> will be implemented on LUTs either because you have described an asynchronous read or because of currently unsupported block RAM features. If you have described an asynchronous read, making it synchronous would allow you to take advantage of available block RAM resources, for optimized device usage and improved timings. Please refer to your documentation for coding guidelines.
+    -----------------------------------------------------------------------
+    | ram_type           | Distributed                         |          |
+    -----------------------------------------------------------------------
+    | Port A                                                              |
+    |     aspect ratio   | 4-word x 4-bit                      |          |
+    |     weA            | connected to signal <GND>           | high     |
+    |     addrA          | connected to signal <dis>           |          |
+    |     diA            | connected to signal <GND>           |          |
+    |     doA            | connected to signal <an>            |          |
+    -----------------------------------------------------------------------
 INFO:Xst:3218 - HDL ADVISOR - The RAM <Mram_seg> will be implemented on LUTs either because you have described an asynchronous read or because of currently unsupported block RAM features. If you have described an asynchronous read, making it synchronous would allow you to take advantage of available block RAM resources, for optimized device usage and improved timings. Please refer to your documentation for coding guidelines.
     -----------------------------------------------------------------------
     | ram_type           | Distributed                         |          |
     -----------------------------------------------------------------------
     | Port A                                                              |
-    |     aspect ratio   | 256-word x 8-bit                    |          |
+    |     aspect ratio   | 16-word x 8-bit                     |          |
     |     weA            | connected to signal <GND>           | high     |
-    |     addrA          | connected to signal <sw>            |          |
+    |     addrA          | connected to signal <val_digit>     |          |
     |     diA            | connected to signal <GND>           |          |
     |     doA            | connected to signal <seg>           |          |
     -----------------------------------------------------------------------
-Unit <SEG_DECODER> synthesized (advanced).
+Unit <SEG_DECODER_DEC> synthesized (advanced).
+
+Synthesizing (advanced) Unit <TWO_BITS_COUNTER>.
+The following registers are absorbed into counter <S>: 1 register on signal <S>.
+Unit <TWO_BITS_COUNTER> synthesized (advanced).
 
 =========================================================================
 Advanced HDL Synthesis Report
 
 Macro Statistics
-# RAMs                                                 : 1
- 256x8-bit single-port distributed Read Only RAM       : 1
-# Registers                                            : 12
- Flip-Flops                                            : 12
+# RAMs                                                 : 2
+ 16x8-bit single-port distributed Read Only RAM        : 1
+ 4x4-bit single-port distributed Read Only RAM         : 1
+# Adders/Subtractors                                   : 4
+ 4-bit adder                                           : 4
+# Counters                                             : 3
+ 2-bit up counter                                      : 1
+ 27-bit up counter                                     : 2
+# Registers                                            : 34
+ Flip-Flops                                            : 34
+# Comparators                                          : 6
+ 27-bit comparator lessequal                           : 2
+ 4-bit comparator lessequal                            : 4
+# Multiplexers                                         : 4
+ 16-bit 2-to-1 multiplexer                             : 3
+ 4-bit 4-to-1 multiplexer                              : 1
 
 =========================================================================
 
@@ -199,9 +298,29 @@ Macro Statistics
 
 Optimizing unit <TOP> ...
 
+Optimizing unit <BCD_COUNTER> ...
+WARNING:Xst:1293 - FF/Latch <count_speed/COUNT_24> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <count_speed/COUNT_25> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <count_speed/COUNT_26> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <clockdiv1/COUNT_17> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <clockdiv1/COUNT_18> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <clockdiv1/COUNT_19> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <clockdiv1/COUNT_20> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <clockdiv1/COUNT_21> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <clockdiv1/COUNT_22> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <clockdiv1/COUNT_23> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <clockdiv1/COUNT_24> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <clockdiv1/COUNT_25> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <clockdiv1/COUNT_26> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+INFO:Xst:2261 - The FF/Latch <count_speed/COUNT_0> in Unit <TOP> is equivalent to the following FF/Latch, which will be removed : <clockdiv1/COUNT_0> 
+INFO:Xst:2261 - The FF/Latch <count_speed/COUNT_1> in Unit <TOP> is equivalent to the following FF/Latch, which will be removed : <clockdiv1/COUNT_1> 
+INFO:Xst:2261 - The FF/Latch <count_speed/COUNT_2> in Unit <TOP> is equivalent to the following FF/Latch, which will be removed : <clockdiv1/COUNT_2> 
+INFO:Xst:2261 - The FF/Latch <count_speed/COUNT_3> in Unit <TOP> is equivalent to the following FF/Latch, which will be removed : <clockdiv1/COUNT_3> 
+INFO:Xst:2261 - The FF/Latch <count_speed/COUNT_4> in Unit <TOP> is equivalent to the following FF/Latch, which will be removed : <clockdiv1/COUNT_4> 
+
 Mapping all equations...
 Building and optimizing final netlist ...
-Found area constraint ratio of 100 (+ 5) on block TOP, actual ratio is 0.
+Found area constraint ratio of 100 (+ 5) on block TOP, actual ratio is 1.
 
 Final Macro Processing ...
 
@@ -209,8 +328,8 @@ Final Macro Processing ...
 Final Register Report
 
 Macro Statistics
-# Registers                                            : 12
- Flip-Flops                                            : 12
+# Registers                                            : 72
+ Flip-Flops                                            : 72
 
 =========================================================================
 
@@ -233,21 +352,26 @@ Top Level Output File Name         : TOP.ngc
 
 Primitive and Black Box Usage:
 ------------------------------
-# BELS                             : 28
+# BELS                             : 196
 #      GND                         : 1
-#      INV                         : 12
-#      LUT3                        : 1
-#      LUT4                        : 6
-#      LUT5                        : 6
-#      LUT6                        : 1
+#      INV                         : 3
+#      LUT2                        : 47
+#      LUT3                        : 3
+#      LUT4                        : 21
+#      LUT5                        : 16
+#      LUT6                        : 15
+#      MUXCY                       : 53
 #      VCC                         : 1
-# FlipFlops/Latches                : 12
-#      FDE                         : 12
+#      XORCY                       : 36
+# FlipFlops/Latches                : 72
+#      FD                          : 16
+#      FDC                         : 38
+#      FDE                         : 18
 # Clock Buffers                    : 1
 #      BUFGP                       : 1
-# IO Buffers                       : 22
-#      IBUF                        : 9
-#      OBUF                        : 13
+# IO Buffers                       : 15
+#      IBUF                        : 1
+#      OBUF                        : 14
 
 Device utilization summary:
 ---------------------------
@@ -256,20 +380,20 @@ Selected Device : 6slx16csg324-3
 
 
 Slice Logic Utilization: 
- Number of Slice Registers:              12  out of  18224     0%  
- Number of Slice LUTs:                   26  out of   9112     0%  
-    Number used as Logic:                26  out of   9112     0%  
+ Number of Slice Registers:              72  out of  18224     0%  
+ Number of Slice LUTs:                  105  out of   9112     1%  
+    Number used as Logic:               105  out of   9112     1%  
 
 Slice Logic Distribution: 
- Number of LUT Flip Flop pairs used:     26
-   Number with an unused Flip Flop:      14  out of     26    53%  
-   Number with an unused LUT:             0  out of     26     0%  
-   Number of fully used LUT-FF pairs:    12  out of     26    46%  
-   Number of unique control sets:        12
+ Number of LUT Flip Flop pairs used:    115
+   Number with an unused Flip Flop:      43  out of    115    37%  
+   Number with an unused LUT:            10  out of    115     8%  
+   Number of fully used LUT-FF pairs:    62  out of    115    53%  
+   Number of unique control sets:         4
 
 IO Utilization: 
- Number of IOs:                          23
- Number of bonded IOBs:                  23  out of    232     9%  
+ Number of IOs:                          26
+ Number of bonded IOBs:                  16  out of    232     6%  
 
 Specific Feature Utilization:
  Number of BUFG/BUFGCTRLs:                1  out of     16     6%  
@@ -295,7 +419,7 @@ Clock Information:
 -----------------------------------+------------------------+-------+
 Clock Signal                       | Clock buffer(FF name)  | Load  |
 -----------------------------------+------------------------+-------+
-clk                                | BUFGP                  | 12    |
+clk                                | BUFGP                  | 72    |
 -----------------------------------+------------------------+-------+
 
 Asynchronous Control Signals Information:
@@ -306,10 +430,10 @@ Timing Summary:
 ---------------
 Speed Grade: -3
 
-   Minimum period: 1.950ns (Maximum Frequency: 512.794MHz)
-   Minimum input arrival time before clock: 2.123ns
-   Maximum output required time after clock: 3.634ns
-   Maximum combinational path delay: 6.482ns
+   Minimum period: 4.889ns (Maximum Frequency: 204.549MHz)
+   Minimum input arrival time before clock: 3.028ns
+   Maximum output required time after clock: 6.271ns
+   Maximum combinational path delay: No path found
 
 Timing Details:
 ---------------
@@ -317,83 +441,68 @@ All values displayed in nanoseconds (ns)
 
 =========================================================================
 Timing constraint: Default period analysis for Clock 'clk'
-  Clock period: 1.950ns (frequency: 512.794MHz)
-  Total number of paths / destination ports: 23 / 23
+  Clock period: 4.889ns (frequency: 204.549MHz)
+  Total number of paths / destination ports: 17179 / 90
 -------------------------------------------------------------------------
-Delay:               1.950ns (Levels of Logic = 1)
-  Source:            dlatch12/S_INTERNAL (FF)
-  Destination:       dlatch12/S_INTERNAL (FF)
+Delay:               4.889ns (Levels of Logic = 4)
+  Source:            bcd1/DIGITS_3 (FF)
+  Destination:       bcd1/DIGITS_15 (FF)
   Source Clock:      clk rising
   Destination Clock: clk rising
 
-  Data Path: dlatch12/S_INTERNAL to dlatch12/S_INTERNAL
+  Data Path: bcd1/DIGITS_3 to bcd1/DIGITS_15
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     FDE:C->Q              2   0.447   0.616  dlatch12/S_INTERNAL (dlatch12/S_INTERNAL)
-     INV:I->O              1   0.206   0.579  dlatch12/S_INTERNAL_INV_2_o1_INV_0 (dlatch12/S_INTERNAL_INV_2_o)
-     FDE:D                     0.102          dlatch12/S_INTERNAL
+     FD:C->Q               6   0.447   0.992  bcd1/DIGITS_3 (bcd1/DIGITS_3)
+     LUT4:I0->O           10   0.203   0.857  bcd1/PWR_33_o_DIGITS[3]_LessThan_2_o1 (bcd1/PWR_33_o_DIGITS[3]_LessThan_2_o)
+     LUT6:I5->O            5   0.205   0.715  bcd1/Mmux_DIGITS[15]_DIGITS[15]_mux_11_OUT411 (bcd1/Mmux_DIGITS[15]_DIGITS[15]_mux_11_OUT41)
+     LUT6:I5->O           14   0.205   0.958  bcd1/_n00471 (bcd1/_n0047)
+     LUT4:I3->O            1   0.205   0.000  bcd1/DIGITS_15_rstpot (bcd1/DIGITS_15_rstpot)
+     FD:D                      0.102          bcd1/DIGITS_15
     ----------------------------------------
-    Total                      1.950ns (0.755ns logic, 1.195ns route)
-                                       (38.7% logic, 61.3% route)
+    Total                      4.889ns (1.367ns logic, 3.522ns route)
+                                       (28.0% logic, 72.0% route)
 
 =========================================================================
 Timing constraint: Default OFFSET IN BEFORE for Clock 'clk'
-  Total number of paths / destination ports: 1 / 1
+  Total number of paths / destination ports: 38 / 38
 -------------------------------------------------------------------------
-Offset:              2.123ns (Levels of Logic = 1)
-  Source:            btnd (PAD)
-  Destination:       dlatch1/S_INTERNAL (FF)
+Offset:              3.028ns (Levels of Logic = 1)
+  Source:            btnr (PAD)
+  Destination:       count_speed/TMP (FF)
   Destination Clock: clk rising
 
-  Data Path: btnd to dlatch1/S_INTERNAL
+  Data Path: btnr to count_speed/TMP
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     IBUF:I->O             1   1.222   0.579  btnd_IBUF (btnd_IBUF)
-     FDE:CE                    0.322          dlatch1/S_INTERNAL
+     IBUF:I->O            38   1.222   1.376  btnr_IBUF (btnr_IBUF)
+     FDC:CLR                   0.430          count_speed/TMP
     ----------------------------------------
-    Total                      2.123ns (1.544ns logic, 0.579ns route)
-                                       (72.7% logic, 27.3% route)
+    Total                      3.028ns (1.652ns logic, 1.376ns route)
+                                       (54.5% logic, 45.5% route)
 
 =========================================================================
 Timing constraint: Default OFFSET OUT AFTER for Clock 'clk'
-  Total number of paths / destination ports: 1 / 1
+  Total number of paths / destination ports: 178 / 13
 -------------------------------------------------------------------------
-Offset:              3.634ns (Levels of Logic = 1)
-  Source:            dlatch12/S_INTERNAL (FF)
-  Destination:       Led (PAD)
+Offset:              6.271ns (Levels of Logic = 3)
+  Source:            tbc1/S_0 (FF)
+  Destination:       seg<6> (PAD)
   Source Clock:      clk rising
 
-  Data Path: dlatch12/S_INTERNAL to Led
+  Data Path: tbc1/S_0 to seg<6>
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     FDE:C->Q              2   0.447   0.616  dlatch12/S_INTERNAL (dlatch12/S_INTERNAL)
-     OBUF:I->O                 2.571          Led_OBUF (Led)
+     FDE:C->Q             11   0.447   1.247  tbc1/S_0 (tbc1/S_0)
+     LUT6:I0->O            7   0.203   1.021  decoder1/Mmux_val_digit11 (decoder1/val_digit<0>)
+     LUT4:I0->O            1   0.203   0.579  decoder1/Mram_seg41 (seg_4_OBUF)
+     OBUF:I->O                 2.571          seg_4_OBUF (seg<4>)
     ----------------------------------------
-    Total                      3.634ns (3.018ns logic, 0.616ns route)
-                                       (83.0% logic, 17.0% route)
-
-=========================================================================
-Timing constraint: Default path analysis
-  Total number of paths / destination ports: 56 / 7
--------------------------------------------------------------------------
-Delay:               6.482ns (Levels of Logic = 4)
-  Source:            sw<3> (PAD)
-  Destination:       seg<6> (PAD)
-
-  Data Path: sw<3> to seg<6>
-                                Gate     Net
-    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
-    ----------------------------------------  ------------
-     IBUF:I->O             7   1.222   1.021  sw_3_IBUF (sw_3_IBUF)
-     LUT4:I0->O            1   0.203   0.684  decoder1/Mram_seg121_SW0 (N0)
-     LUT5:I3->O            1   0.203   0.579  decoder1/Mram_seg121 (seg_0_OBUF)
-     OBUF:I->O                 2.571          seg_0_OBUF (seg<0>)
-    ----------------------------------------
-    Total                      6.482ns (4.199ns logic, 2.283ns route)
-                                       (64.8% logic, 35.2% route)
+    Total                      6.271ns (3.424ns logic, 2.847ns route)
+                                       (54.6% logic, 45.4% route)
 
 =========================================================================
 
@@ -405,21 +514,21 @@ Clock to Setup on destination clock clk
                | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
 Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
 ---------------+---------+---------+---------+---------+
-clk            |    1.950|         |         |         |
+clk            |    4.889|         |         |         |
 ---------------+---------+---------+---------+---------+
 
 =========================================================================
 
 
-Total REAL time to Xst completion: 6.00 secs
-Total CPU time to Xst completion: 6.01 secs
+Total REAL time to Xst completion: 7.00 secs
+Total CPU time to Xst completion: 6.62 secs
  
 --> 
 
 
-Total memory usage is 374944 kilobytes
+Total memory usage is 376764 kilobytes
 
 Number of errors   :    0 (   0 filtered)
-Number of warnings :    0 (   0 filtered)
-Number of infos    :    1 (   0 filtered)
+Number of warnings :   17 (   0 filtered)
+Number of infos    :    7 (   0 filtered)
 

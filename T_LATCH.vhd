@@ -34,10 +34,15 @@ begin
 		begin
 				if (CLK'event and CLK='1') then
 					if (T = '1') then
-						S_INTERNAL <= not S_INTERNAL;
+						S_INTERNAL <= NOT(S_INTERNAL);
 					end if;
 				end if;
 		end process PRO_T_LATCH;
-		s <= S_INTERNAL;
+		S <= S_INTERNAL;
 end Behavioral;
+
+
+
+
+						
 

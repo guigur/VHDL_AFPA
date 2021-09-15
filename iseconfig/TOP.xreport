@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <report-views version="2.0" >
  <header>
-  <DateModified>2021-09-15T08:18:26</DateModified>
+  <DateModified>2021-09-15T08:34:20</DateModified>
   <ModuleName>TOP</ModuleName>
   <SummaryTimeStamp>Unknown</SummaryTimeStamp>
-  <SavedFilePath>/home/stetd/first-test/iseconfig/TOP.xreport</SavedFilePath>
-  <ImplementationReportsDirectory>/home/stetd/first-test/</ImplementationReportsDirectory>
+  <SavedFilePath>/home/stetd/Documents/github/VHDL_AFPA/iseconfig/TOP.xreport</SavedFilePath>
+  <ImplementationReportsDirectory>/home/stetd/Documents/github/VHDL_AFPA/</ImplementationReportsDirectory>
   <DateInitialized>2021-09-14T15:28:46</DateInitialized>
   <EnableMessageFiltering>false</EnableMessageFiltering>
  </header>
