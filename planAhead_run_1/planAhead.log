@@ -1,0 +1,75 @@
+#-----------------------------------------------------------
+# PlanAhead v14.7 (64-bit)
+# Build 321239 by xbuild on Fri Sep 27 19:24:36 MDT 2013
+# Start of session at: Tue Sep 14 12:39:38 2021
+# Process ID: 10938
+# Log file: /home/stetd/first-test/planAhead_run_1/planAhead.log
+# Journal file: /home/stetd/first-test/planAhead_run_1/planAhead.jou
+#-----------------------------------------------------------
+INFO: [Common 17-78] Attempting to get a license: PlanAhead
+INFO: [Common 17-290] Got license for PlanAhead
+INFO: [Common 17-86] Your PlanAhead license expires in -1932 day(s)
+INFO: [Device 21-36] Loading parts and site information from /home/Xilinx/14.7/ISE_DS/PlanAhead/data/parts/arch.xml
+Parsing RTL primitives file [/home/Xilinx/14.7/ISE_DS/PlanAhead/data/parts/xilinx/rtl/prims/rtl_prims.xml]
+Finished parsing RTL primitives file [/home/Xilinx/14.7/ISE_DS/PlanAhead/data/parts/xilinx/rtl/prims/rtl_prims.xml]
+start_gui
+source /home/stetd/first-test/pa.fromHdl.tcl
+# create_project -name first-test -dir "/home/stetd/first-test/planAhead_run_1" -part xc6slx16csg324-3
+# set_param project.pinAheadLayout yes
+# set srcset [get_property srcset [current_run -impl]]
+# set_property target_constrs_file "top.ucf" [current_fileset -constrset]
+Adding file '/home/stetd/first-test/top.ucf' to fileset 'constrs_1'
+# set hdlfile [add_files [list {top.vhd}]]
+# set_property file_type VHDL $hdlfile
+# set_property library work $hdlfile
+# set_property top top $srcset
+# add_files [list {top.ucf}] -fileset [get_property constrset [current_run]]
+# open_rtl_design -part xc6slx16csg324-3
+Using Verific elaboration
+Parsing VHDL file "/home/Xilinx/14.7/ISE_DS/PlanAhead/data/parts/xilinx/rtl/lib/synplify/synattr.vhd" into library synplify
+Parsing VHDL file "/home/Xilinx/14.7/ISE_DS/PlanAhead/data/parts/xilinx/rtl/lib/synplify/synattr.vhd" into library synplify
+Parsing VHDL file "/home/stetd/first-test/top.vhd" into library work
+Loading clock regions from /home/Xilinx/14.7/ISE_DS/PlanAhead/data/parts/xilinx/spartan6/spartan6lx/xc6slx16/ClockRegion.xml
+Loading clock buffers from /home/Xilinx/14.7/ISE_DS/PlanAhead/data/parts/xilinx/spartan6/spartan6lx/xc6slx16/ClockBuffers.xml
+Loading package pin functions from /home/Xilinx/14.7/ISE_DS/PlanAhead/data/parts/xilinx/spartan6/PinFunctions.xml...
+Loading package from /home/Xilinx/14.7/ISE_DS/PlanAhead/data/parts/xilinx/spartan6/spartan6lx/xc6slx16/csg324/Package.xml
+Loading io standards from /home/Xilinx/14.7/ISE_DS/PlanAhead/data/./parts/xilinx/spartan6/IOStandards.xml
+Loading device configuration modes from /home/Xilinx/14.7/ISE_DS/PlanAhead/data/parts/xilinx/spartan6/ConfigModes.xml
+Loading list of drcs for the architecture : /home/Xilinx/14.7/ISE_DS/PlanAhead/data/./parts/xilinx/spartan6/drc.xml
+Parsing UCF File [/home/stetd/first-test/top.ucf]
+Finished Parsing UCF File [/home/stetd/first-test/top.ucf]
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Phase 0 | Netlist Checksum: 06a1faf6
+open_rtl_design: Time (s): cpu = 00:00:15 ; elapsed = 00:00:12 . Memory (MB): peak = 2873.574 ; gain = 142.035
+update_compile_order -fileset sim_1
+set_property package_pin "" [get_ports [list  DEC]]
+undo
+INFO: [Common 17-17] undo 'set_property package_pin "" [get_ports [list  DEC]]'
+set_property iostandard LVCMOS25 [get_ports [list DEC]]
+undo
+INFO: [Common 17-17] undo 'set_property iostandard LVCMOS25 [get_ports [list DEC]]'
+startgroup
+set_property package_pin T17 [get_ports DEC]
+endgroup
+set_property iostandard LVCMOS25 [get_ports [list DEC]]
+undo
+INFO: [Common 17-17] undo 'set_property iostandard LVCMOS25 [get_ports [list DEC]]'
+undo
+INFO: [Common 17-17] undo 'endgroup'
+INFO: [Common 17-17] undo 'set_property package_pin T17 [get_ports DEC]'
+INFO: [Common 17-17] undo 'startgroup'
+startgroup
+set_property package_pin T17 [get_ports DEC]
+endgroup
+exit
+ERROR: [#UNDEF] *** Exception: ui.h.b: Found deleted key in HTclEventBroker. Verify if the classes listed here call cleanup()
+HTclEvent: SIGNAL_MODIFY   Classes: ui.views.aR 
+HTclEvent: SIGNAL_BUS_MODIFY   Classes: ui.views.aR 
+HTclEvent: DEBUG_PORT_CONFIG_CHANGE   Classes: ui.views.aR 
+HTclEvent: DEBUG_CORE_CONFIG_CHANGE   Classes: ui.views.aR 
+ (See /home/stetd/first-test/planAhead_pid10938.debug)
+ERROR: [Common 17-39] 'stop_gui' failed due to earlier errors.
+INFO: [Common 17-206] Exiting PlanAhead at Tue Sep 14 12:43:46 2021...
+INFO: [Common 17-83] Releasing license: PlanAhead

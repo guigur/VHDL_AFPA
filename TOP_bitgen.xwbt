@@ -1,0 +1,8 @@
+INTSTYLE=ise
+INFILE=/home/stetd/first-test/TOP.ncd
+OUTFILE=/home/stetd/first-test/TOP.bit
+FAMILY=Spartan6
+PART=xc6slx16-3csg324
+WORKINGDIR=/home/stetd/first-test
+LICENSE=WebPack
+USER_INFO=174133039_202014052_0_911

@@ -1,0 +1,3 @@
+xst -intstyle ise -ifn "/home/stetd/first-test/D_LATCH.xst" -ofn "/home/stetd/first-test/D_LATCH.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc top.ucf -p xc6slx16-csg324-3 D_LATCH.ngc D_LATCH.ngd  
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc top.ucf -p xc6slx16-csg324-3 D_LATCH.ngc D_LATCH.ngd  

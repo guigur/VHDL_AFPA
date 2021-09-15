@@ -1,0 +1,151 @@
+------------------------------------------------------------------------------------------------------------------------------------
+|                                                      Xilinx XPower Analyzer                                                      |
+------------------------------------------------------------------------------------------------------------------------------------
+| Release                | 14.7 - P.20131013 (lin64)                                                                               |
+| Command Line           | /home/Xilinx/14.7/ISE_DS/ISE/bin/lin64/unwrapped/xpwr -intstyle ise -ol std top.ncd top.pcf -o top.pwr  |
+------------------------------------------------------------------------------------------------------------------------------------
+
+--------------------------------
+|      Table of Contents       |
+--------------------------------
+| 1.  Settings                 |
+| 1.1.  Project                |
+| 1.2.  Device                 |
+| 1.3.  Environment            |
+| 1.4.  Default Activity Rates |
+| 2.  Summary                  |
+| 2.1.  On-Chip Power Summary  |
+| 2.2.  Thermal Summary        |
+| 2.3.  Power Supply Summary   |
+| 2.4.  Confidence Level       |
+| 3.  Detailed Reports         |
+| 3.1.  By Hierarchy           |
+| 4.  Warnings                 |
+--------------------------------
+
+1.  Settings
+1.1.  Project
+---------------------------------------
+|               Project               |
+---------------------------------------
+| Design File               | top.ncd |
+| Settings File             | NA      |
+| Physical Constraints File | top.pcf |
+| Simulation Activity File  | NA      |
+| Design Nets Matched       | NA      |
+| Simulation Nets Matched   | NA      |
+---------------------------------------
+
+1.2.  Device
+-------------------------------------------------
+|                    Device                     |
+-------------------------------------------------
+| Family           | Spartan6                   |
+| Part             | xc6slx16                   |
+| Package          | csg324                     |
+| Temp Grade       | C-Grade                    |
+| Process          | Typical                    |
+| Speed Grade      | -3                         |
+| Characterization | Production,v1.3,2011-05-04 |
+-------------------------------------------------
+
+1.3.  Environment
+---------------------------
+|       Environment       |
+---------------------------
+| Ambient Temp (C) | 25.0 |
+| Use custom TJA?  | No   |
+| Custom TJA (C/W) | NA   |
+| Airflow (LFM)    | 0    |
+| Heat Sink        | None |
+| Custom TSA (C/W) | NA   |
+---------------------------
+
+1.4.  Default Activity Rates
+----------------------------------
+|     Default Activity Rates     |
+----------------------------------
+| FF Toggle Rate (%)     | 12.5  |
+| I/O Toggle Rate (%)    | 12.5  |
+| Output Load (pF)       | 5.0   |
+| I/O Enable Rate (%)    | 100.0 |
+| BRAM Write Rate (%)    | 50.0  |
+| BRAM Enable Rate (%)   | 50.0  |
+| DSP Toggle Rate (%)    | 12.5  |
+----------------------------------
+
+2.  Summary
+2.1.  On-Chip Power Summary
+-----------------------------------------------------------------------------
+|                           On-Chip Power Summary                           |
+-----------------------------------------------------------------------------
+|        On-Chip        | Power (mW) |  Used  | Available | Utilization (%) |
+-----------------------------------------------------------------------------
+| Clocks                |       0.00 |      0 |    ---    |       ---       |
+| Logic                 |       0.00 |      2 |      9112 |               0 |
+| Signals               |       0.00 |     10 |    ---    |       ---       |
+| IOs                   |       0.00 |     20 |       232 |               9 |
+| Static Power          |      21.51 |        |           |                 |
+| Total                 |      21.51 |        |           |                 |
+-----------------------------------------------------------------------------
+
+2.2.  Thermal Summary
+------------------------------
+|      Thermal Summary       |
+------------------------------
+| Effective TJA (C/W) | 27.8 |
+| Max Ambient (C)     | 84.4 |
+| Junction Temp (C)   | 25.6 |
+------------------------------
+
+2.3.  Power Supply Summary
+---------------------------------------------------------
+|                 Power Supply Summary                  |
+---------------------------------------------------------
+|                      | Total | Dynamic | Static Power |
+---------------------------------------------------------
+| Supply Power (mW)    | 21.51 | 0.00    | 21.51        |
+---------------------------------------------------------
+
+---------------------------------------------------------------------------------------------------------------
+|                                            Power Supply Currents                                            |
+---------------------------------------------------------------------------------------------------------------
+|     Supply Source     | Supply Voltage | Total Current (mA) | Dynamic Current (mA) | Quiescent Current (mA) |
+---------------------------------------------------------------------------------------------------------------
+| Vccint                |          1.200 |               6.12 |                 0.00 |                   6.12 |
+| Vccaux                |          2.500 |               3.03 |                 0.00 |                   3.03 |
+| Vcco33                |          3.300 |               2.00 |                 0.00 |                   2.00 |
+---------------------------------------------------------------------------------------------------------------
+
+2.4.  Confidence Level
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+|                                                                                                Confidence Level                                                                                                |
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+|       User Input Data       | Confidence |                    Details                     |                                                       Action                                                       |
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Design implementation state | High       | Design is completely routed                    |                                                                                                                    |
+| Clock nodes activity        | Low        | User specified less than 75% of clocks         | Provide missing clock activity with a constraint file, simulation results or by editing the "By Clock Domain" view |
+| I/O nodes activity          | High       | User specified more than 95% of inputs         |                                                                                                                    |
+| Internal nodes activity     | Medium     | User specified less than 25% of internal nodes | Provide missing internal nodes activity with simulation results or by editing the "By Resource Type" views         |
+| Device models               | High       | Device models are Production                   |                                                                                                                    |
+|                             |            |                                                |                                                                                                                    |
+| Overall confidence level    | Low        |                                                |                                                                                                                    |
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+3.  Details
+3.1.  By Hierarchy
+--------------------------------------------------------------------------------
+|  By Hierarchy   | Power (mW) | Logic Power (mW) | Signal Power (mW) | # LUTs |
+--------------------------------------------------------------------------------
+| Hierarchy total |   0.00     |   0.00           |   0.00            |      2 |
+|   top           |   0.00     |   0.00           |   0.00            |      2 |
+--------------------------------------------------------------------------------
+
+
+4.  Warnings
+--------------------------------------------------------------------------------
+WARNING:PowerEstimator:270 - Power estimate is considered inaccurate. To see details, generate an advanced report with the "-v" switch.
+--------------------------------------------------------------------------------
+
+Analysis completed: Tue Sep 14 13:21:30 2021
+----------------------------------------------------------------

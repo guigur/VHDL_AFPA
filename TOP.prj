@@ -1,0 +1,3 @@
+vhdl work "T_LATCH.vhd"
+vhdl work "seg_decoder.vhd"
+vhdl work "top.vhd"
