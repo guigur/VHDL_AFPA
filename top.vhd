@@ -29,7 +29,12 @@ entity TOP is
 				clk 			: in std_logic;
 				btnu, btnd	: in std_logic;
 				btnr			: in std_logic;
-				Led			: out std_logic_vector(1 downto 0)
+				Led			: out std_logic_vector(1 downto 0);
+				vgaRed      : out  	STD_LOGIC_VECTOR(2 downto 0); -- 3 bits
+				vgaGreen    : out  	STD_LOGIC_VECTOR(2 downto 0); -- 3 bits
+				vgaBlue     : out  	STD_LOGIC_VECTOR(1 downto 0); -- 2 bits
+				Hsync   		: out   STD_LOGIC;
+				Vsync   		: out   STD_LOGIC
 		);
 end TOP;
 
@@ -49,6 +54,16 @@ architecture Behavioral of TOP is
 					an		: out std_logic_vector(3 downto 0) --Array of the 4 anodes
 				);
 		END COMPONENT;
+		COMPONENT VGA_DISPLAY
+				Port ( RST, CLK	: in    STD_LOGIC;
+					RED      : out  	STD_LOGIC_VECTOR(2 downto 0); -- 3 bits
+					GREEN    : out  	STD_LOGIC_VECTOR(2 downto 0); -- 3 bits
+					BLUE     : out  	STD_LOGIC_VECTOR(1 downto 0); -- 2 bits
+					H_SYNC   : out   STD_LOGIC;
+					V_SYNC   : out   STD_LOGIC
+				);
+		END COMPONENT;		
+		
 --		COMPONENT D_LATCH 
 --				PORT (
 --						D, CLK	: in  STD_LOGIC;
@@ -93,6 +108,9 @@ architecture Behavioral of TOP is
 		SIGNAL COUNT_INTERNAL : std_logic_vector(1 downto 0);
 		SIGNAL DIGITS_VAL_INTERNAL : STD_LOGIC_VECTOR(15 DOWNTO 0);
 		begin
+		
+			vgaDisplay1: VGA_DISPLAY
+					port map(RST=>btnr, CLK=>CLK, RED=>vgaRed, GREEN=>vgaGreen, BLUE=>vgaBlue, H_SYNC=>Hsync, V_SYNC=>Vsync);
 		
 
 			clockdiv1: CLOCK_DIV

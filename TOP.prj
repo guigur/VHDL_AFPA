@@ -1,3 +1,4 @@
+vhdl work "VGA_DISPLAY.vhd"
 vhdl work "seg_decoder_dec.vhd"
 vhdl work "MUX_1_TO_4.vhd"
 vhdl work "CLOCK_DIV.vhd"

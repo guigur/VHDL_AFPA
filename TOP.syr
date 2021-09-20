@@ -108,6 +108,9 @@ Slice Utilization Ratio Delta      : 5
 =========================================================================
 *                          HDL Parsing                                  *
 =========================================================================
+Parsing VHDL file "/home/stetd/Documents/github/VHDL_AFPA/VGA_DISPLAY.vhd" into library work
+Parsing entity <VGA_DISPLAY>.
+Parsing architecture <Behavioral> of entity <vga_display>.
 Parsing VHDL file "/home/stetd/Documents/github/VHDL_AFPA/seg_decoder_dec.vhd" into library work
 Parsing entity <SEG_DECODER_DEC>.
 Parsing architecture <Behavioral> of entity <seg_decoder_dec>.
@@ -130,8 +133,11 @@ Parsing architecture <Behavioral> of entity <top>.
 
 Elaborating entity <TOP> (architecture <Behavioral>) from library <work>.
 
+Elaborating entity <VGA_DISPLAY> (architecture <Behavioral>) from library <work>.
+WARNING:HDLCompiler:1127 - "/home/stetd/Documents/github/VHDL_AFPA/VGA_DISPLAY.vhd" Line 73: Assignment to vblanking ignored, since the identifier is never used
+
 Elaborating entity <CLOCK_DIV> (architecture <Behavioral>) from library <work>.
-WARNING:HDLCompiler:439 - "/home/stetd/Documents/github/VHDL_AFPA/top.vhd" Line 73: Formal port s of mode inout cannot be associated with actual port s of mode out
+WARNING:HDLCompiler:439 - "/home/stetd/Documents/github/VHDL_AFPA/top.vhd" Line 88: Formal port s of mode inout cannot be associated with actual port s of mode out
 INFO:HDLCompiler:1408 - "/home/stetd/Documents/github/VHDL_AFPA/MUX_1_TO_4.vhd" Line 37. s is declared here
 
 Elaborating entity <TWO_BITS_COUNTER> (architecture <Behavioral>) from library <work>.
@@ -154,11 +160,39 @@ WARNING:Xst:647 - Input <btnd> is never used. This port will be preserved and le
 	no macro.
 Unit <TOP> synthesized.
 
+Synthesizing Unit <VGA_DISPLAY>.
+    Related source file is "/home/stetd/Documents/github/VHDL_AFPA/VGA_DISPLAY.vhd".
+    Found 10-bit register for signal <VerticalCounter>.
+    Found 1-bit register for signal <H_SYNC>.
+    Found 1-bit register for signal <Hblanking>.
+    Found 12-bit register for signal <HorizontalCounter>.
+    Found 3-bit register for signal <RED>.
+    Found 3-bit register for signal <GREEN>.
+    Found 2-bit register for signal <BLUE>.
+    Found 1-bit register for signal <V_SYNC>.
+    Found 10-bit adder for signal <VerticalCounter[9]_GND_5_o_add_14_OUT> created at line 120.
+    Found 12-bit adder for signal <HorizontalCounter[11]_GND_5_o_add_23_OUT> created at line 124.
+    Found 10-bit comparator greater for signal <VerticalCounter[9]_GND_5_o_LessThan_1_o> created at line 78
+    Found 10-bit comparator greater for signal <VerticalCounter[9]_GND_5_o_LessThan_2_o> created at line 82
+    Found 10-bit comparator greater for signal <VerticalCounter[9]_GND_5_o_LessThan_3_o> created at line 86
+    Found 10-bit comparator greater for signal <VerticalCounter[9]_PWR_5_o_LessThan_4_o> created at line 91
+    Found 12-bit comparator greater for signal <HorizontalCounter[11]_GND_5_o_LessThan_9_o> created at line 101
+    Found 12-bit comparator greater for signal <HorizontalCounter[11]_GND_5_o_LessThan_10_o> created at line 105
+    Found 12-bit comparator greater for signal <HorizontalCounter[11]_PWR_5_o_LessThan_11_o> created at line 109
+    Found 10-bit comparator greater for signal <GND_5_o_VerticalCounter[9]_LessThan_13_o> created at line 109
+    Found 12-bit comparator greater for signal <HorizontalCounter[11]_PWR_5_o_LessThan_14_o> created at line 114
+    Summary:
+	inferred   2 Adder/Subtractor(s).
+	inferred  33 D-type flip-flop(s).
+	inferred   9 Comparator(s).
+	inferred   5 Multiplexer(s).
+Unit <VGA_DISPLAY> synthesized.
+
 Synthesizing Unit <CLOCK_DIV>.
     Related source file is "/home/stetd/Documents/github/VHDL_AFPA/CLOCK_DIV.vhd".
     Found 1-bit register for signal <TMP>.
     Found 27-bit register for signal <COUNT>.
-    Found 27-bit adder for signal <COUNT[26]_GND_5_o_add_1_OUT> created at line 47.
+    Found 27-bit adder for signal <COUNT[26]_GND_6_o_add_1_OUT> created at line 47.
     Found 27-bit comparator lessequal for signal <n0000> created at line 42
     Summary:
 	inferred   1 Adder/Subtractor(s).
@@ -170,7 +204,7 @@ Unit <CLOCK_DIV> synthesized.
 Synthesizing Unit <TWO_BITS_COUNTER>.
     Related source file is "/home/stetd/Documents/github/VHDL_AFPA/MUX_1_TO_4.vhd".
     Found 2-bit register for signal <S>.
-    Found 2-bit adder for signal <S[1]_GND_25_o_add_0_OUT> created at line 48.
+    Found 2-bit adder for signal <S[1]_GND_26_o_add_0_OUT> created at line 48.
     Summary:
 	inferred   1 Adder/Subtractor(s).
 	inferred   2 D-type flip-flop(s).
@@ -180,10 +214,10 @@ Synthesizing Unit <BCD_COUNTER>.
     Related source file is "/home/stetd/Documents/github/VHDL_AFPA/BCD_COUNTER.vhd".
     Found 16-bit register for signal <S>.
     Found 16-bit register for signal <DIGITS>.
-    Found 4-bit adder for signal <DIGITS[3]_GND_39_o_add_0_OUT> created at line 45.
-    Found 4-bit adder for signal <DIGITS[7]_GND_39_o_add_2_OUT> created at line 49.
-    Found 4-bit adder for signal <DIGITS[11]_GND_39_o_add_4_OUT> created at line 53.
-    Found 4-bit adder for signal <DIGITS[15]_GND_39_o_add_6_OUT> created at line 57.
+    Found 4-bit adder for signal <DIGITS[3]_GND_40_o_add_0_OUT> created at line 45.
+    Found 4-bit adder for signal <DIGITS[7]_GND_40_o_add_2_OUT> created at line 49.
+    Found 4-bit adder for signal <DIGITS[11]_GND_40_o_add_4_OUT> created at line 53.
+    Found 4-bit adder for signal <DIGITS[15]_GND_40_o_add_6_OUT> created at line 57.
     Found 4-bit comparator lessequal for signal <n0001> created at line 46
     Found 4-bit comparator lessequal for signal <n0004> created at line 50
     Found 4-bit comparator lessequal for signal <n0007> created at line 54
@@ -212,19 +246,28 @@ Macro Statistics
 # RAMs                                                 : 2
  16x8-bit single-port Read Only RAM                    : 1
  4x4-bit single-port Read Only RAM                     : 1
-# Adders/Subtractors                                   : 7
+# Adders/Subtractors                                   : 9
+ 10-bit adder                                          : 1
+ 12-bit adder                                          : 1
  2-bit adder                                           : 1
  27-bit adder                                          : 2
  4-bit adder                                           : 4
-# Registers                                            : 7
- 1-bit register                                        : 2
+# Registers                                            : 15
+ 1-bit register                                        : 5
+ 10-bit register                                       : 1
+ 12-bit register                                       : 1
  16-bit register                                       : 2
- 2-bit register                                        : 1
+ 2-bit register                                        : 2
  27-bit register                                       : 2
-# Comparators                                          : 6
+ 3-bit register                                        : 2
+# Comparators                                          : 15
+ 10-bit comparator greater                             : 5
+ 12-bit comparator greater                             : 4
  27-bit comparator lessequal                           : 2
  4-bit comparator lessequal                            : 4
-# Multiplexers                                         : 6
+# Multiplexers                                         : 11
+ 1-bit 2-to-1 multiplexer                              : 1
+ 10-bit 2-to-1 multiplexer                             : 4
  16-bit 2-to-1 multiplexer                             : 3
  27-bit 2-to-1 multiplexer                             : 2
  4-bit 4-to-1 multiplexer                              : 1
@@ -235,6 +278,11 @@ Macro Statistics
 *                       Advanced HDL Synthesis                          *
 =========================================================================
 
+WARNING:Xst:1710 - FF/Latch <BLUE_0> (without init value) has a constant value of 0 in block <vgaDisplay1>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <BLUE_1> (without init value) has a constant value of 0 in block <vgaDisplay1>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <GREEN_0> (without init value) has a constant value of 0 in block <vgaDisplay1>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <GREEN_1> (without init value) has a constant value of 0 in block <vgaDisplay1>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <GREEN_2> (without init value) has a constant value of 0 in block <vgaDisplay1>. This FF/Latch will be trimmed during the optimization process.
 
 Synthesizing (advanced) Unit <CLOCK_DIV>.
 The following registers are absorbed into counter <COUNT>: 1 register on signal <COUNT>.
@@ -269,6 +317,10 @@ Synthesizing (advanced) Unit <TWO_BITS_COUNTER>.
 The following registers are absorbed into counter <S>: 1 register on signal <S>.
 Unit <TWO_BITS_COUNTER> synthesized (advanced).
 
+Synthesizing (advanced) Unit <VGA_DISPLAY>.
+The following registers are absorbed into counter <HorizontalCounter>: 1 register on signal <HorizontalCounter>.
+Unit <VGA_DISPLAY> synthesized (advanced).
+
 =========================================================================
 Advanced HDL Synthesis Report
 
@@ -276,17 +328,23 @@ Macro Statistics
 # RAMs                                                 : 2
  16x8-bit single-port distributed Read Only RAM        : 1
  4x4-bit single-port distributed Read Only RAM         : 1
-# Adders/Subtractors                                   : 4
+# Adders/Subtractors                                   : 5
+ 10-bit adder                                          : 1
  4-bit adder                                           : 4
-# Counters                                             : 3
+# Counters                                             : 4
+ 12-bit up counter                                     : 1
  2-bit up counter                                      : 1
  27-bit up counter                                     : 2
-# Registers                                            : 34
- Flip-Flops                                            : 34
-# Comparators                                          : 6
+# Registers                                            : 55
+ Flip-Flops                                            : 55
+# Comparators                                          : 15
+ 10-bit comparator greater                             : 5
+ 12-bit comparator greater                             : 4
  27-bit comparator lessequal                           : 2
  4-bit comparator lessequal                            : 4
-# Multiplexers                                         : 4
+# Multiplexers                                         : 9
+ 1-bit 2-to-1 multiplexer                              : 1
+ 10-bit 2-to-1 multiplexer                             : 4
  16-bit 2-to-1 multiplexer                             : 3
  4-bit 4-to-1 multiplexer                              : 1
 
@@ -295,8 +353,17 @@ Macro Statistics
 =========================================================================
 *                         Low Level Synthesis                           *
 =========================================================================
+WARNING:Xst:1710 - FF/Latch <GREEN_0> (without init value) has a constant value of 0 in block <VGA_DISPLAY>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <GREEN_1> (without init value) has a constant value of 0 in block <VGA_DISPLAY>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <GREEN_2> (without init value) has a constant value of 0 in block <VGA_DISPLAY>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <BLUE_0> (without init value) has a constant value of 0 in block <VGA_DISPLAY>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <BLUE_1> (without init value) has a constant value of 0 in block <VGA_DISPLAY>. This FF/Latch will be trimmed during the optimization process.
 
 Optimizing unit <TOP> ...
+
+Optimizing unit <VGA_DISPLAY> ...
+WARNING:Xst:1710 - FF/Latch <Hblanking> (without init value) has a constant value of 1 in block <VGA_DISPLAY>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <Hblanking> (without init value) has a constant value of 1 in block <VGA_DISPLAY>. This FF/Latch will be trimmed during the optimization process.
 
 Optimizing unit <BCD_COUNTER> ...
 WARNING:Xst:1293 - FF/Latch <count_speed/COUNT_24> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
@@ -312,6 +379,9 @@ WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <clockdiv1/COUNT_23>
 WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <clockdiv1/COUNT_24> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <clockdiv1/COUNT_25> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <clockdiv1/COUNT_26> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <vgaDisplay1/RED_2> (without init value) has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <vgaDisplay1/RED_1> (without init value) has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <vgaDisplay1/RED_0> (without init value) has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
 INFO:Xst:2261 - The FF/Latch <count_speed/COUNT_0> in Unit <TOP> is equivalent to the following FF/Latch, which will be removed : <clockdiv1/COUNT_0> 
 INFO:Xst:2261 - The FF/Latch <count_speed/COUNT_1> in Unit <TOP> is equivalent to the following FF/Latch, which will be removed : <clockdiv1/COUNT_1> 
 INFO:Xst:2261 - The FF/Latch <count_speed/COUNT_2> in Unit <TOP> is equivalent to the following FF/Latch, which will be removed : <clockdiv1/COUNT_2> 
@@ -328,8 +398,8 @@ Final Macro Processing ...
 Final Register Report
 
 Macro Statistics
-# Registers                                            : 72
- Flip-Flops                                            : 72
+# Registers                                            : 96
+ Flip-Flops                                            : 96
 
 =========================================================================
 
@@ -352,26 +422,27 @@ Top Level Output File Name         : TOP.ngc
 
 Primitive and Black Box Usage:
 ------------------------------
-# BELS                             : 196
+# BELS                             : 250
 #      GND                         : 1
-#      INV                         : 3
-#      LUT2                        : 47
-#      LUT3                        : 3
-#      LUT4                        : 21
-#      LUT5                        : 16
-#      LUT6                        : 15
-#      MUXCY                       : 53
+#      INV                         : 5
+#      LUT1                        : 11
+#      LUT2                        : 48
+#      LUT3                        : 6
+#      LUT4                        : 23
+#      LUT5                        : 22
+#      LUT6                        : 21
+#      MUXCY                       : 64
 #      VCC                         : 1
-#      XORCY                       : 36
-# FlipFlops/Latches                : 72
+#      XORCY                       : 48
+# FlipFlops/Latches                : 96
 #      FD                          : 16
 #      FDC                         : 38
-#      FDE                         : 18
+#      FDE                         : 42
 # Clock Buffers                    : 1
 #      BUFGP                       : 1
-# IO Buffers                       : 15
+# IO Buffers                       : 25
 #      IBUF                        : 1
-#      OBUF                        : 14
+#      OBUF                        : 24
 
 Device utilization summary:
 ---------------------------
@@ -380,20 +451,20 @@ Selected Device : 6slx16csg324-3
 
 
 Slice Logic Utilization: 
- Number of Slice Registers:              72  out of  18224     0%  
- Number of Slice LUTs:                  105  out of   9112     1%  
-    Number used as Logic:               105  out of   9112     1%  
+ Number of Slice Registers:              96  out of  18224     0%  
+ Number of Slice LUTs:                  136  out of   9112     1%  
+    Number used as Logic:               136  out of   9112     1%  
 
 Slice Logic Distribution: 
- Number of LUT Flip Flop pairs used:    115
-   Number with an unused Flip Flop:      43  out of    115    37%  
-   Number with an unused LUT:            10  out of    115     8%  
-   Number of fully used LUT-FF pairs:    62  out of    115    53%  
-   Number of unique control sets:         4
+ Number of LUT Flip Flop pairs used:    146
+   Number with an unused Flip Flop:      50  out of    146    34%  
+   Number with an unused LUT:            10  out of    146     6%  
+   Number of fully used LUT-FF pairs:    86  out of    146    58%  
+   Number of unique control sets:         6
 
 IO Utilization: 
- Number of IOs:                          26
- Number of bonded IOBs:                  16  out of    232     6%  
+ Number of IOs:                          36
+ Number of bonded IOBs:                  26  out of    232    11%  
 
 Specific Feature Utilization:
  Number of BUFG/BUFGCTRLs:                1  out of     16     6%  
@@ -419,7 +490,7 @@ Clock Information:
 -----------------------------------+------------------------+-------+
 Clock Signal                       | Clock buffer(FF name)  | Load  |
 -----------------------------------+------------------------+-------+
-clk                                | BUFGP                  | 72    |
+clk                                | BUFGP                  | 96    |
 -----------------------------------+------------------------+-------+
 
 Asynchronous Control Signals Information:
@@ -431,7 +502,7 @@ Timing Summary:
 Speed Grade: -3
 
    Minimum period: 4.889ns (Maximum Frequency: 204.549MHz)
-   Minimum input arrival time before clock: 3.028ns
+   Minimum input arrival time before clock: 4.373ns
    Maximum output required time after clock: 6.271ns
    Maximum combinational path delay: No path found
 
@@ -442,7 +513,7 @@ All values displayed in nanoseconds (ns)
 =========================================================================
 Timing constraint: Default period analysis for Clock 'clk'
   Clock period: 4.889ns (frequency: 204.549MHz)
-  Total number of paths / destination ports: 17179 / 90
+  Total number of paths / destination ports: 17526 / 124
 -------------------------------------------------------------------------
 Delay:               4.889ns (Levels of Logic = 4)
   Source:            bcd1/DIGITS_3 (FF)
@@ -455,7 +526,7 @@ Delay:               4.889ns (Levels of Logic = 4)
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
      FD:C->Q               6   0.447   0.992  bcd1/DIGITS_3 (bcd1/DIGITS_3)
-     LUT4:I0->O           10   0.203   0.857  bcd1/PWR_33_o_DIGITS[3]_LessThan_2_o1 (bcd1/PWR_33_o_DIGITS[3]_LessThan_2_o)
+     LUT4:I0->O           10   0.203   0.857  bcd1/PWR_34_o_DIGITS[3]_LessThan_2_o1 (bcd1/PWR_34_o_DIGITS[3]_LessThan_2_o)
      LUT6:I5->O            5   0.205   0.715  bcd1/Mmux_DIGITS[15]_DIGITS[15]_mux_11_OUT411 (bcd1/Mmux_DIGITS[15]_DIGITS[15]_mux_11_OUT41)
      LUT6:I5->O           14   0.205   0.958  bcd1/_n00471 (bcd1/_n0047)
      LUT4:I3->O            1   0.205   0.000  bcd1/DIGITS_15_rstpot (bcd1/DIGITS_15_rstpot)
@@ -466,26 +537,27 @@ Delay:               4.889ns (Levels of Logic = 4)
 
 =========================================================================
 Timing constraint: Default OFFSET IN BEFORE for Clock 'clk'
-  Total number of paths / destination ports: 38 / 38
+  Total number of paths / destination ports: 62 / 62
 -------------------------------------------------------------------------
-Offset:              3.028ns (Levels of Logic = 1)
+Offset:              4.373ns (Levels of Logic = 2)
   Source:            btnr (PAD)
-  Destination:       count_speed/TMP (FF)
+  Destination:       vgaDisplay1/VerticalCounter_9 (FF)
   Destination Clock: clk rising
 
-  Data Path: btnr to count_speed/TMP
+  Data Path: btnr to vgaDisplay1/VerticalCounter_9
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     IBUF:I->O            38   1.222   1.376  btnr_IBUF (btnr_IBUF)
-     FDC:CLR                   0.430          count_speed/TMP
+     IBUF:I->O            40   1.222   1.770  btnr_IBUF (btnr_IBUF)
+     LUT6:I0->O           10   0.203   0.856  vgaDisplay1/_n0145_inv (vgaDisplay1/_n0145_inv)
+     FDE:CE                    0.322          vgaDisplay1/VerticalCounter_0
     ----------------------------------------
-    Total                      3.028ns (1.652ns logic, 1.376ns route)
-                                       (54.5% logic, 45.5% route)
+    Total                      4.373ns (1.747ns logic, 2.626ns route)
+                                       (40.0% logic, 60.0% route)
 
 =========================================================================
 Timing constraint: Default OFFSET OUT AFTER for Clock 'clk'
-  Total number of paths / destination ports: 178 / 13
+  Total number of paths / destination ports: 180 / 15
 -------------------------------------------------------------------------
 Offset:              6.271ns (Levels of Logic = 3)
   Source:            tbc1/S_0 (FF)
@@ -521,14 +593,14 @@ clk            |    4.889|         |         |         |
 
 
 Total REAL time to Xst completion: 7.00 secs
-Total CPU time to Xst completion: 6.62 secs
+Total CPU time to Xst completion: 6.86 secs
  
 --> 
 
 
-Total memory usage is 376764 kilobytes
+Total memory usage is 377136 kilobytes
 
 Number of errors   :    0 (   0 filtered)
-Number of warnings :   17 (   0 filtered)
+Number of warnings :   33 (   0 filtered)
 Number of infos    :    7 (   0 filtered)
 
