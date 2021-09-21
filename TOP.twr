@@ -36,7 +36,7 @@ Setup/Hold to clock clk
             |Max Setup to|  Process   |Max Hold to |  Process   |                  | Clock  |
 Source      | clk (edge) |   Corner   | clk (edge) |   Corner   |Internal Clock(s) | Phase  |
 ------------+------------+------------+------------+------------+------------------+--------+
-btnr        |    6.334(R)|      SLOW  |   -0.344(R)|      SLOW  |clk_BUFGP         |   0.000|
+btnr        |    6.038(R)|      SLOW  |   -0.392(R)|      SLOW  |JD0_OBUF_BUFG     |   0.000|
 ------------+------------+------------+------------+------------+------------------+--------+
 
 Clock clk to Pad
@@ -44,21 +44,25 @@ Clock clk to Pad
             |Max (slowest) clk|  Process   |Min (fastest) clk|  Process   |                  | Clock  |
 Destination |  (edge) to PAD  |   Corner   |  (edge) to PAD  |   Corner   |Internal Clock(s) | Phase  |
 ------------+-----------------+------------+-----------------+------------+------------------+--------+
-Hsync       |         8.477(R)|      SLOW  |         4.812(R)|      FAST  |clk_BUFGP         |   0.000|
-Led<0>      |         8.978(R)|      SLOW  |         5.104(R)|      FAST  |clk_BUFGP         |   0.000|
-Led<1>      |         9.427(R)|      SLOW  |         5.383(R)|      FAST  |clk_BUFGP         |   0.000|
-Vsync       |         8.564(R)|      SLOW  |         4.835(R)|      FAST  |clk_BUFGP         |   0.000|
-an<0>       |         9.291(R)|      SLOW  |         5.061(R)|      FAST  |clk_BUFGP         |   0.000|
-an<1>       |         9.304(R)|      SLOW  |         5.075(R)|      FAST  |clk_BUFGP         |   0.000|
-an<2>       |         8.638(R)|      SLOW  |         4.794(R)|      FAST  |clk_BUFGP         |   0.000|
-an<3>       |         8.873(R)|      SLOW  |         4.942(R)|      FAST  |clk_BUFGP         |   0.000|
-seg<0>      |        10.309(R)|      SLOW  |         5.371(R)|      FAST  |clk_BUFGP         |   0.000|
-seg<1>      |        10.397(R)|      SLOW  |         5.439(R)|      FAST  |clk_BUFGP         |   0.000|
-seg<2>      |        10.386(R)|      SLOW  |         5.340(R)|      FAST  |clk_BUFGP         |   0.000|
-seg<3>      |        10.837(R)|      SLOW  |         5.507(R)|      FAST  |clk_BUFGP         |   0.000|
-seg<4>      |        10.400(R)|      SLOW  |         5.271(R)|      FAST  |clk_BUFGP         |   0.000|
-seg<5>      |        10.689(R)|      SLOW  |         5.545(R)|      FAST  |clk_BUFGP         |   0.000|
-seg<6>      |        10.928(R)|      SLOW  |         5.575(R)|      FAST  |clk_BUFGP         |   0.000|
+Hsync       |         9.802(R)|      SLOW  |         5.583(R)|      FAST  |JD0_OBUF_BUFG     |   0.000|
+JD3         |         8.454(R)|      SLOW  |         4.739(R)|      FAST  |JD0_OBUF_BUFG     |   0.000|
+Led<0>      |         9.649(R)|      SLOW  |         5.522(R)|      FAST  |JD0_OBUF_BUFG     |   0.000|
+Led<1>      |         9.620(R)|      SLOW  |         5.472(R)|      FAST  |JD0_OBUF_BUFG     |   0.000|
+Vsync       |         9.586(R)|      SLOW  |         5.448(R)|      FAST  |JD0_OBUF_BUFG     |   0.000|
+an<0>       |         9.450(R)|      SLOW  |         5.170(R)|      FAST  |JD0_OBUF_BUFG     |   0.000|
+an<1>       |         9.483(R)|      SLOW  |         5.186(R)|      FAST  |JD0_OBUF_BUFG     |   0.000|
+an<2>       |         8.911(R)|      SLOW  |         4.928(R)|      FAST  |JD0_OBUF_BUFG     |   0.000|
+an<3>       |         9.010(R)|      SLOW  |         5.007(R)|      FAST  |JD0_OBUF_BUFG     |   0.000|
+seg<0>      |        10.820(R)|      SLOW  |         5.467(R)|      FAST  |JD0_OBUF_BUFG     |   0.000|
+seg<1>      |        11.003(R)|      SLOW  |         5.603(R)|      FAST  |JD0_OBUF_BUFG     |   0.000|
+seg<2>      |        10.773(R)|      SLOW  |         5.532(R)|      FAST  |JD0_OBUF_BUFG     |   0.000|
+seg<3>      |        11.046(R)|      SLOW  |         5.732(R)|      FAST  |JD0_OBUF_BUFG     |   0.000|
+seg<4>      |        11.100(R)|      SLOW  |         5.663(R)|      FAST  |JD0_OBUF_BUFG     |   0.000|
+seg<5>      |        11.018(R)|      SLOW  |         5.677(R)|      FAST  |JD0_OBUF_BUFG     |   0.000|
+seg<6>      |        10.870(R)|      SLOW  |         5.615(R)|      FAST  |JD0_OBUF_BUFG     |   0.000|
+vgaRed<0>   |         9.373(R)|      SLOW  |         5.314(R)|      FAST  |JD0_OBUF_BUFG     |   0.000|
+vgaRed<1>   |         9.707(R)|      SLOW  |         5.572(R)|      FAST  |JD0_OBUF_BUFG     |   0.000|
+vgaRed<2>   |         9.531(R)|      SLOW  |         5.396(R)|      FAST  |JD0_OBUF_BUFG     |   0.000|
 ------------+-----------------+------------+-----------------+------------+------------------+--------+
 
 Clock to Setup on destination clock clk
@@ -66,11 +70,18 @@ Clock to Setup on destination clock clk
                | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
 Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
 ---------------+---------+---------+---------+---------+
-clk            |    4.691|         |         |         |
+clk            |    4.538|         |         |         |
 ---------------+---------+---------+---------+---------+
 
+Pad to Pad
+---------------+---------------+---------+
+Source Pad     |Destination Pad|  Delay  |
+---------------+---------------+---------+
+clk            |JD0            |   10.093|
+---------------+---------------+---------+
 
-Analysis completed Mon Sep 20 16:12:19 2021 
+
+Analysis completed Tue Sep 21 18:28:46 2021 
 --------------------------------------------------------------------------------
 
 Trace Settings:

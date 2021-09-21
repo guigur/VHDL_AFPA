@@ -20,14 +20,16 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 entity VGA_DISPLAY is
-    Port ( RST, CLK	: in    STD_LOGIC;
-           RED      : out  	STD_LOGIC_VECTOR(2 downto 0); -- 3 bits
-           GREEN    : out  	STD_LOGIC_VECTOR(2 downto 0); -- 3 bits
-           BLUE     : out  	STD_LOGIC_VECTOR(1 downto 0); -- 2 bits
-           H_SYNC   : out   STD_LOGIC;
-           V_SYNC   : out   STD_LOGIC
+    Port ( RST, CLK		: in	STD_LOGIC;
+			  PixelClock	: out	STD_LOGIC;
+           RED      		: out  	STD_LOGIC_VECTOR(2 downto 0); -- 3 bits
+           GREEN    		: out  	STD_LOGIC_VECTOR(2 downto 0); -- 3 bits
+           BLUE     		: out  	STD_LOGIC_VECTOR(1 downto 0); -- 2 bits
+           H_SYNC   		: out   STD_LOGIC;
+           V_SYNC   		: out   STD_LOGIC
     );
 end VGA_DISPLAY;
 
@@ -63,77 +65,90 @@ end VGA_DISPLAY;
 
 architecture Behavioral of VGA_DISPLAY is
 		--SIGNAL TMP	: STD_LOGIC;
-		SIGNAL HorizontalCounter: INTEGER RANGE 0 TO 3200 := 0; -- 800 col total
-      SIGNAL VerticalCounter: INTEGER RANGE 0 TO 521 := 0; -- 521 rows total
-        --SIGNAL PixelClock: STD_LOGIC_VECTOR(1 downto 0); -- 2 bits to count to 4
+		SIGNAL HorizontalCounter: INTEGER RANGE 0 TO 3199:= 0; -- 3199 800 col total
+      SIGNAL VerticalCounter: INTEGER RANGE 0 TO 520 := 0; -- 521 rows total
+      SIGNAL PixelClockCounter: STD_LOGIC_VECTOR(1 downto 0); -- 2 bits to count to 4
 		SIGNAL Vblanking: STD_LOGIC;
 		SIGNAL Hblanking: STD_LOGIC;
+      SIGNAL PixelClock_INT: STD_LOGIC;
 
 begin
 	PRO_VGA_DISPLAY : process (RST, CLK) -- Reset is an Sync signal
 	begin
-		if (RST = '1') THEN
+			if (RST = '1') THEN
             --RESET 
-        elsif rising_edge(CLK) THEN--(CLK'event and CLK='1') THEN
-            if (VerticalCounter < 2) THEN
-                -- V Sync
-                V_SYNC <= '0';
-					 Vblanking <= '1';
-            elsif (VerticalCounter < 31) THEN  -- 2 + 29 = 31
-                -- V back porch
-                V_SYNC <= '1';
-					 Vblanking <= '1';
-            elsif (VerticalCounter < 511) THEN  -- 480 + 31 = 511
-                -- display col
-                V_SYNC <= '1';
-					 Vblanking <= '0';
-
-            elsif (VerticalCounter < 521) THEN  -- 511 + 10
-                -- V front porch
-                V_SYNC <= '1';
-					 Vblanking <= '1';
-            else
-                VerticalCounter <= 0;
-                V_SYNC <= '1';
-					 Vblanking <= '1';
-            end if;
-
-			if (HorizontalCounter < 384) THEN
-				-- H sync
-                H_SYNC <= '0';
-					 Hblanking <= '1';
-            elsif (HorizontalCounter < 576) THEN -- 192 + 384 = 576
-                -- back porch
-						H_SYNC <= '1';
-						Hblanking <= '1';
-            elsif (HorizontalCounter < 3136 and VerticalCounter < 31 and VerticalCounter > 510) THEN -- 576 + 2560 = 3136
-                -- display
-                H_SYNC <= '1';
-					Hblanking <= '0';
-
-            elsif (HorizontalCounter < 3200) THEN -- 64 + 3136 = 3200
-				-- front porch
-                H_SYNC <= '1';
-					 Hblanking <= '1';
-            else
-                HorizontalCounter <= 0;
-                VerticalCounter <= VerticalCounter + 1;
-                H_SYNC <= '1';
-					 Hblanking <= '1';
-				end if;
-            HorizontalCounter <= HorizontalCounter + 1;
+			elsif rising_edge(CLK) THEN--(CLK'event and CLK='1') THEN
 				
-				if (Hblanking = '0' and Hblanking = '0') THEN
-				    RED <= "111";
-                GREEN <= "000";
-                BLUE <= "00";
+            
+				if (VerticalCounter < 479) THEN
+                -- V Display
+					V_SYNC <= '1';
+					Vblanking <= '0';
 				else
-					 RED <= "000";
-                GREEN <= "000";
-                BLUE <= "00";
+					if (VerticalCounter < 489) THEN  -- 479 + 10 = 489
+						 -- V front porch
+						V_SYNC <= '1';
+					elsif (VerticalCounter < 491) THEN  -- 489 + 2 = 491
+						-- V sync
+						V_SYNC <= '0';
+					else --if (VerticalCounter < 521) THEN  -- 511 + 10
+						--V back porch
+						V_SYNC <= '1';
+					end if;
+					Vblanking <= '1';
 				end if;
 				
-        end if;
+
+				if (HorizontalCounter < 2559) THEN --2559 - valide
+					-- DISPLAY
+					H_SYNC <= '1';
+					Hblanking <= '0';
+				else
+					if (HorizontalCounter < 2623) THEN -- 2559 + 64 = 2623
+						-- front porch
+						H_SYNC <= '1';
+					elsif (HorizontalCounter < 3007) THEN --2623 + 384 = 3007
+						-- H sync
+						H_SYNC <= '0';
+							
+					else -- (HorizontalCounter < 3199) THEN -- 3007 + 192
+						-- back porch
+						H_SYNC <= '1';
+					end if;
+					Hblanking <= '1';
+				end if;
+				
+				
+				if (HorizontalCounter < 3199) THEN
+					HorizontalCounter <= HorizontalCounter + 1;
+				else
+					HorizontalCounter <= 0;
+					if (VerticalCounter < 520) THEN
+						VerticalCounter <= VerticalCounter + 1;
+					else
+						VerticalCounter <= 0;
+					end if;
+				end if;
+							
+				--if (PixelClockCounter = "11") THEN
+				--	PixelClock_INT <= not(PixelClock_INT);
+				--	
+				--end if;
+				PixelClockCounter <= PixelClockCounter + 1;
+				PixelClock_INT <= PixelClockCounter(1);
+				
+				if (Hblanking = '0' and Vblanking = '0') THEN
+					RED <= "111";
+					GREEN <= "000";
+					BLUE <= "00";
+				else
+					RED <= "000";
+					GREEN <= "000";
+					BLUE <= "00";
+				end if;
+			end if;
+				
+			PixelClock <= PixelClock_INT;	
 	end process PRO_VGA_DISPLAY;
 
 	--S <= TMP;

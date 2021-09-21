@@ -34,7 +34,8 @@ entity TOP is
 				vgaGreen    : out  	STD_LOGIC_VECTOR(2 downto 0); -- 3 bits
 				vgaBlue     : out  	STD_LOGIC_VECTOR(1 downto 0); -- 2 bits
 				Hsync   		: out   STD_LOGIC;
-				Vsync   		: out   STD_LOGIC
+				Vsync   		: out   STD_LOGIC;
+				JD0, JD1, JD2, JD3		: out   STD_LOGIC
 		);
 end TOP;
 
@@ -55,12 +56,13 @@ architecture Behavioral of TOP is
 				);
 		END COMPONENT;
 		COMPONENT VGA_DISPLAY
-				Port ( RST, CLK	: in    STD_LOGIC;
-					RED      : out  	STD_LOGIC_VECTOR(2 downto 0); -- 3 bits
-					GREEN    : out  	STD_LOGIC_VECTOR(2 downto 0); -- 3 bits
-					BLUE     : out  	STD_LOGIC_VECTOR(1 downto 0); -- 2 bits
-					H_SYNC   : out   STD_LOGIC;
-					V_SYNC   : out   STD_LOGIC
+				Port ( RST, CLK	: in	STD_LOGIC;
+						 PixelClock	: out	STD_LOGIC;
+						 RED      	: out	STD_LOGIC_VECTOR(2 downto 0); -- 3 bits
+						 GREEN    	: out	STD_LOGIC_VECTOR(2 downto 0); -- 3 bits
+						 BLUE     	: out	STD_LOGIC_VECTOR(1 downto 0); -- 2 bits
+						 H_SYNC   	: out	STD_LOGIC;
+						 V_SYNC   	: out	STD_LOGIC
 				);
 		END COMPONENT;		
 		
@@ -110,9 +112,12 @@ architecture Behavioral of TOP is
 		begin
 		
 			vgaDisplay1: VGA_DISPLAY
-					port map(RST=>btnr, CLK=>CLK, RED=>vgaRed, GREEN=>vgaGreen, BLUE=>vgaBlue, H_SYNC=>Hsync, V_SYNC=>Vsync);
-		
-
+					port map(RST=>btnr, CLK=>CLK, PixelClock=>JD3, RED=>vgaRed, GREEN=>vgaGreen, BLUE=>vgaBlue, H_SYNC=>Hsync, V_SYNC=>Vsync);
+		JD0 <= CLK;
+		--Vsync <= '1';
+		--Hsync <= '1';
+		JD1 <= '1';
+		JD2 <= '1';
 			clockdiv1: CLOCK_DIV
 					port map(RST=>btnr, CLK=>CLK, SPEED=>99999, S=>CLK_DIV_INTERNAL);
 

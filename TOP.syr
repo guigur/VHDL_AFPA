@@ -134,10 +134,10 @@ Parsing architecture <Behavioral> of entity <top>.
 Elaborating entity <TOP> (architecture <Behavioral>) from library <work>.
 
 Elaborating entity <VGA_DISPLAY> (architecture <Behavioral>) from library <work>.
-WARNING:HDLCompiler:1127 - "/home/stetd/Documents/github/VHDL_AFPA/VGA_DISPLAY.vhd" Line 73: Assignment to vblanking ignored, since the identifier is never used
+WARNING:HDLCompiler:92 - "/home/stetd/Documents/github/VHDL_AFPA/VGA_DISPLAY.vhd" Line 151: pixelclock_int should be on the sensitivity list of the process
 
 Elaborating entity <CLOCK_DIV> (architecture <Behavioral>) from library <work>.
-WARNING:HDLCompiler:439 - "/home/stetd/Documents/github/VHDL_AFPA/top.vhd" Line 88: Formal port s of mode inout cannot be associated with actual port s of mode out
+WARNING:HDLCompiler:439 - "/home/stetd/Documents/github/VHDL_AFPA/top.vhd" Line 90: Formal port s of mode inout cannot be associated with actual port s of mode out
 INFO:HDLCompiler:1408 - "/home/stetd/Documents/github/VHDL_AFPA/MUX_1_TO_4.vhd" Line 37. s is declared here
 
 Elaborating entity <TWO_BITS_COUNTER> (architecture <Behavioral>) from library <work>.
@@ -162,37 +162,40 @@ Unit <TOP> synthesized.
 
 Synthesizing Unit <VGA_DISPLAY>.
     Related source file is "/home/stetd/Documents/github/VHDL_AFPA/VGA_DISPLAY.vhd".
-    Found 10-bit register for signal <VerticalCounter>.
+    Found 1-bit register for signal <Vblanking>.
     Found 1-bit register for signal <H_SYNC>.
     Found 1-bit register for signal <Hblanking>.
     Found 12-bit register for signal <HorizontalCounter>.
+    Found 10-bit register for signal <VerticalCounter>.
+    Found 2-bit register for signal <PixelClockCounter>.
+    Found 1-bit register for signal <PixelClock_INT>.
     Found 3-bit register for signal <RED>.
     Found 3-bit register for signal <GREEN>.
     Found 2-bit register for signal <BLUE>.
     Found 1-bit register for signal <V_SYNC>.
-    Found 10-bit adder for signal <VerticalCounter[9]_GND_5_o_add_14_OUT> created at line 120.
-    Found 12-bit adder for signal <HorizontalCounter[11]_GND_5_o_add_23_OUT> created at line 124.
-    Found 10-bit comparator greater for signal <VerticalCounter[9]_GND_5_o_LessThan_1_o> created at line 78
-    Found 10-bit comparator greater for signal <VerticalCounter[9]_GND_5_o_LessThan_2_o> created at line 82
-    Found 10-bit comparator greater for signal <VerticalCounter[9]_GND_5_o_LessThan_3_o> created at line 86
-    Found 10-bit comparator greater for signal <VerticalCounter[9]_PWR_5_o_LessThan_4_o> created at line 91
-    Found 12-bit comparator greater for signal <HorizontalCounter[11]_GND_5_o_LessThan_9_o> created at line 101
-    Found 12-bit comparator greater for signal <HorizontalCounter[11]_GND_5_o_LessThan_10_o> created at line 105
-    Found 12-bit comparator greater for signal <HorizontalCounter[11]_PWR_5_o_LessThan_11_o> created at line 109
-    Found 10-bit comparator greater for signal <GND_5_o_VerticalCounter[9]_LessThan_13_o> created at line 109
-    Found 12-bit comparator greater for signal <HorizontalCounter[11]_PWR_5_o_LessThan_14_o> created at line 114
+    Found 12-bit adder for signal <HorizontalCounter[11]_GND_7_o_add_7_OUT> created at line 123.
+    Found 10-bit adder for signal <VerticalCounter[9]_GND_7_o_add_9_OUT> created at line 127.
+    Found 2-bit adder for signal <PixelClockCounter[1]_GND_7_o_add_13_OUT> created at line 137.
+    Found 10-bit comparator greater for signal <VerticalCounter[9]_GND_7_o_LessThan_1_o> created at line 83
+    Found 10-bit comparator greater for signal <VerticalCounter[9]_GND_7_o_LessThan_2_o> created at line 88
+    Found 10-bit comparator lessequal for signal <VerticalCounter[9]_GND_7_o_LessThan_3_o> created at line 91
+    Found 12-bit comparator greater for signal <HorizontalCounter[11]_PWR_7_o_LessThan_4_o> created at line 102
+    Found 12-bit comparator greater for signal <HorizontalCounter[11]_PWR_7_o_LessThan_5_o> created at line 107
+    Found 12-bit comparator lessequal for signal <HorizontalCounter[11]_PWR_7_o_LessThan_6_o> created at line 110
+    Found 12-bit comparator greater for signal <HorizontalCounter[11]_PWR_7_o_LessThan_7_o> created at line 122
+    Found 10-bit comparator lessequal for signal <VerticalCounter[9]_PWR_7_o_LessThan_9_o> created at line 126
     Summary:
-	inferred   2 Adder/Subtractor(s).
-	inferred  33 D-type flip-flop(s).
-	inferred   9 Comparator(s).
-	inferred   5 Multiplexer(s).
+	inferred   3 Adder/Subtractor(s).
+	inferred  37 D-type flip-flop(s).
+	inferred   8 Comparator(s).
+	inferred   2 Multiplexer(s).
 Unit <VGA_DISPLAY> synthesized.
 
 Synthesizing Unit <CLOCK_DIV>.
     Related source file is "/home/stetd/Documents/github/VHDL_AFPA/CLOCK_DIV.vhd".
     Found 1-bit register for signal <TMP>.
     Found 27-bit register for signal <COUNT>.
-    Found 27-bit adder for signal <COUNT[26]_GND_6_o_add_1_OUT> created at line 47.
+    Found 27-bit adder for signal <COUNT[26]_GND_8_o_add_1_OUT> created at line 47.
     Found 27-bit comparator lessequal for signal <n0000> created at line 42
     Summary:
 	inferred   1 Adder/Subtractor(s).
@@ -246,28 +249,29 @@ Macro Statistics
 # RAMs                                                 : 2
  16x8-bit single-port Read Only RAM                    : 1
  4x4-bit single-port Read Only RAM                     : 1
-# Adders/Subtractors                                   : 9
+# Adders/Subtractors                                   : 10
  10-bit adder                                          : 1
  12-bit adder                                          : 1
- 2-bit adder                                           : 1
+ 2-bit adder                                           : 2
  27-bit adder                                          : 2
  4-bit adder                                           : 4
-# Registers                                            : 15
- 1-bit register                                        : 5
+# Registers                                            : 18
+ 1-bit register                                        : 7
  10-bit register                                       : 1
  12-bit register                                       : 1
  16-bit register                                       : 2
- 2-bit register                                        : 2
+ 2-bit register                                        : 3
  27-bit register                                       : 2
  3-bit register                                        : 2
-# Comparators                                          : 15
- 10-bit comparator greater                             : 5
- 12-bit comparator greater                             : 4
+# Comparators                                          : 14
+ 10-bit comparator greater                             : 2
+ 10-bit comparator lessequal                           : 2
+ 12-bit comparator greater                             : 3
+ 12-bit comparator lessequal                           : 1
  27-bit comparator lessequal                           : 2
  4-bit comparator lessequal                            : 4
-# Multiplexers                                         : 11
- 1-bit 2-to-1 multiplexer                              : 1
- 10-bit 2-to-1 multiplexer                             : 4
+# Multiplexers                                         : 8
+ 1-bit 2-to-1 multiplexer                              : 2
  16-bit 2-to-1 multiplexer                             : 3
  27-bit 2-to-1 multiplexer                             : 2
  4-bit 4-to-1 multiplexer                              : 1
@@ -318,7 +322,9 @@ The following registers are absorbed into counter <S>: 1 register on signal <S>.
 Unit <TWO_BITS_COUNTER> synthesized (advanced).
 
 Synthesizing (advanced) Unit <VGA_DISPLAY>.
+The following registers are absorbed into counter <PixelClockCounter>: 1 register on signal <PixelClockCounter>.
 The following registers are absorbed into counter <HorizontalCounter>: 1 register on signal <HorizontalCounter>.
+The following registers are absorbed into counter <VerticalCounter>: 1 register on signal <VerticalCounter>.
 Unit <VGA_DISPLAY> synthesized (advanced).
 
 =========================================================================
@@ -328,23 +334,24 @@ Macro Statistics
 # RAMs                                                 : 2
  16x8-bit single-port distributed Read Only RAM        : 1
  4x4-bit single-port distributed Read Only RAM         : 1
-# Adders/Subtractors                                   : 5
- 10-bit adder                                          : 1
+# Adders/Subtractors                                   : 4
  4-bit adder                                           : 4
-# Counters                                             : 4
+# Counters                                             : 6
+ 10-bit up counter                                     : 1
  12-bit up counter                                     : 1
- 2-bit up counter                                      : 1
+ 2-bit up counter                                      : 2
  27-bit up counter                                     : 2
-# Registers                                            : 55
- Flip-Flops                                            : 55
-# Comparators                                          : 15
- 10-bit comparator greater                             : 5
- 12-bit comparator greater                             : 4
+# Registers                                            : 47
+ Flip-Flops                                            : 47
+# Comparators                                          : 14
+ 10-bit comparator greater                             : 2
+ 10-bit comparator lessequal                           : 2
+ 12-bit comparator greater                             : 3
+ 12-bit comparator lessequal                           : 1
  27-bit comparator lessequal                           : 2
  4-bit comparator lessequal                            : 4
-# Multiplexers                                         : 9
- 1-bit 2-to-1 multiplexer                              : 1
- 10-bit 2-to-1 multiplexer                             : 4
+# Multiplexers                                         : 6
+ 1-bit 2-to-1 multiplexer                              : 2
  16-bit 2-to-1 multiplexer                             : 3
  4-bit 4-to-1 multiplexer                              : 1
 
@@ -362,8 +369,6 @@ WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <BLUE_1> (without in
 Optimizing unit <TOP> ...
 
 Optimizing unit <VGA_DISPLAY> ...
-WARNING:Xst:1710 - FF/Latch <Hblanking> (without init value) has a constant value of 1 in block <VGA_DISPLAY>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1710 - FF/Latch <Hblanking> (without init value) has a constant value of 1 in block <VGA_DISPLAY>. This FF/Latch will be trimmed during the optimization process.
 
 Optimizing unit <BCD_COUNTER> ...
 WARNING:Xst:1293 - FF/Latch <count_speed/COUNT_24> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
@@ -379,9 +384,7 @@ WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <clockdiv1/COUNT_23>
 WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <clockdiv1/COUNT_24> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <clockdiv1/COUNT_25> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <clockdiv1/COUNT_26> has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <vgaDisplay1/RED_2> (without init value) has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <vgaDisplay1/RED_1> (without init value) has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <vgaDisplay1/RED_0> (without init value) has a constant value of 0 in block <TOP>. This FF/Latch will be trimmed during the optimization process.
+INFO:Xst:2261 - The FF/Latch <vgaDisplay1/RED_2> in Unit <TOP> is equivalent to the following 2 FFs/Latches, which will be removed : <vgaDisplay1/RED_1> <vgaDisplay1/RED_0> 
 INFO:Xst:2261 - The FF/Latch <count_speed/COUNT_0> in Unit <TOP> is equivalent to the following FF/Latch, which will be removed : <clockdiv1/COUNT_0> 
 INFO:Xst:2261 - The FF/Latch <count_speed/COUNT_1> in Unit <TOP> is equivalent to the following FF/Latch, which will be removed : <clockdiv1/COUNT_1> 
 INFO:Xst:2261 - The FF/Latch <count_speed/COUNT_2> in Unit <TOP> is equivalent to the following FF/Latch, which will be removed : <clockdiv1/COUNT_2> 
@@ -398,8 +401,8 @@ Final Macro Processing ...
 Final Register Report
 
 Macro Statistics
-# Registers                                            : 96
- Flip-Flops                                            : 96
+# Registers                                            : 102
+ Flip-Flops                                            : 102
 
 =========================================================================
 
@@ -422,27 +425,27 @@ Top Level Output File Name         : TOP.ngc
 
 Primitive and Black Box Usage:
 ------------------------------
-# BELS                             : 250
+# BELS                             : 307
 #      GND                         : 1
-#      INV                         : 5
-#      LUT1                        : 11
-#      LUT2                        : 48
-#      LUT3                        : 6
-#      LUT4                        : 23
-#      LUT5                        : 22
-#      LUT6                        : 21
-#      MUXCY                       : 64
+#      INV                         : 7
+#      LUT1                        : 20
+#      LUT2                        : 50
+#      LUT3                        : 7
+#      LUT4                        : 35
+#      LUT5                        : 28
+#      LUT6                        : 27
+#      MUXCY                       : 73
 #      VCC                         : 1
-#      XORCY                       : 48
-# FlipFlops/Latches                : 96
-#      FD                          : 16
+#      XORCY                       : 58
+# FlipFlops/Latches                : 102
+#      FD                          : 41
 #      FDC                         : 38
-#      FDE                         : 42
+#      FDE                         : 23
 # Clock Buffers                    : 1
-#      BUFGP                       : 1
-# IO Buffers                       : 25
-#      IBUF                        : 1
-#      OBUF                        : 24
+#      BUFG                        : 1
+# IO Buffers                       : 30
+#      IBUF                        : 2
+#      OBUF                        : 28
 
 Device utilization summary:
 ---------------------------
@@ -451,20 +454,20 @@ Selected Device : 6slx16csg324-3
 
 
 Slice Logic Utilization: 
- Number of Slice Registers:              96  out of  18224     0%  
- Number of Slice LUTs:                  136  out of   9112     1%  
-    Number used as Logic:               136  out of   9112     1%  
+ Number of Slice Registers:             102  out of  18224     0%  
+ Number of Slice LUTs:                  174  out of   9112     1%  
+    Number used as Logic:               174  out of   9112     1%  
 
 Slice Logic Distribution: 
- Number of LUT Flip Flop pairs used:    146
-   Number with an unused Flip Flop:      50  out of    146    34%  
-   Number with an unused LUT:            10  out of    146     6%  
-   Number of fully used LUT-FF pairs:    86  out of    146    58%  
-   Number of unique control sets:         6
+ Number of LUT Flip Flop pairs used:    185
+   Number with an unused Flip Flop:      83  out of    185    44%  
+   Number with an unused LUT:            11  out of    185     5%  
+   Number of fully used LUT-FF pairs:    91  out of    185    49%  
+   Number of unique control sets:         5
 
 IO Utilization: 
- Number of IOs:                          36
- Number of bonded IOBs:                  26  out of    232    11%  
+ Number of IOs:                          40
+ Number of bonded IOBs:                  30  out of    232    12%  
 
 Specific Feature Utilization:
  Number of BUFG/BUFGCTRLs:                1  out of     16     6%  
@@ -490,7 +493,7 @@ Clock Information:
 -----------------------------------+------------------------+-------+
 Clock Signal                       | Clock buffer(FF name)  | Load  |
 -----------------------------------+------------------------+-------+
-clk                                | BUFGP                  | 96    |
+clk                                | IBUF+BUFG              | 102   |
 -----------------------------------+------------------------+-------+
 
 Asynchronous Control Signals Information:
@@ -501,10 +504,10 @@ Timing Summary:
 ---------------
 Speed Grade: -3
 
-   Minimum period: 4.889ns (Maximum Frequency: 204.549MHz)
-   Minimum input arrival time before clock: 4.373ns
+   Minimum period: 4.920ns (Maximum Frequency: 203.254MHz)
+   Minimum input arrival time before clock: 4.600ns
    Maximum output required time after clock: 6.271ns
-   Maximum combinational path delay: No path found
+   Maximum combinational path delay: 4.372ns
 
 Timing Details:
 ---------------
@@ -512,34 +515,34 @@ All values displayed in nanoseconds (ns)
 
 =========================================================================
 Timing constraint: Default period analysis for Clock 'clk'
-  Clock period: 4.889ns (frequency: 204.549MHz)
-  Total number of paths / destination ports: 17526 / 124
+  Clock period: 4.920ns (frequency: 203.254MHz)
+  Total number of paths / destination ports: 17869 / 120
 -------------------------------------------------------------------------
-Delay:               4.889ns (Levels of Logic = 4)
-  Source:            bcd1/DIGITS_3 (FF)
-  Destination:       bcd1/DIGITS_15 (FF)
+Delay:               4.920ns (Levels of Logic = 4)
+  Source:            vgaDisplay1/HorizontalCounter_4 (FF)
+  Destination:       vgaDisplay1/VerticalCounter_9 (FF)
   Source Clock:      clk rising
   Destination Clock: clk rising
 
-  Data Path: bcd1/DIGITS_3 to bcd1/DIGITS_15
+  Data Path: vgaDisplay1/HorizontalCounter_4 to vgaDisplay1/VerticalCounter_9
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     FD:C->Q               6   0.447   0.992  bcd1/DIGITS_3 (bcd1/DIGITS_3)
-     LUT4:I0->O           10   0.203   0.857  bcd1/PWR_34_o_DIGITS[3]_LessThan_2_o1 (bcd1/PWR_34_o_DIGITS[3]_LessThan_2_o)
-     LUT6:I5->O            5   0.205   0.715  bcd1/Mmux_DIGITS[15]_DIGITS[15]_mux_11_OUT411 (bcd1/Mmux_DIGITS[15]_DIGITS[15]_mux_11_OUT41)
-     LUT6:I5->O           14   0.205   0.958  bcd1/_n00471 (bcd1/_n0047)
-     LUT4:I3->O            1   0.205   0.000  bcd1/DIGITS_15_rstpot (bcd1/DIGITS_15_rstpot)
-     FD:D                      0.102          bcd1/DIGITS_15
+     FD:C->Q               4   0.447   1.048  vgaDisplay1/HorizontalCounter_4 (vgaDisplay1/HorizontalCounter_4)
+     LUT6:I0->O            5   0.203   0.715  vgaDisplay1/HorizontalCounter[11]_PWR_7_o_LessThan_4_o1 (vgaDisplay1/HorizontalCounter[11]_PWR_7_o_LessThan_4_o1)
+     LUT6:I5->O           13   0.205   0.933  vgaDisplay1/HorizontalCounter[11]_PWR_7_o_LessThan_7_o1 (vgaDisplay1/HorizontalCounter[11]_PWR_7_o_LessThan_7_o)
+     LUT6:I5->O           10   0.205   0.857  vgaDisplay1/_n0081 (vgaDisplay1/_n0081)
+     LUT5:I4->O            1   0.205   0.000  vgaDisplay1/VerticalCounter_9_rstpot (vgaDisplay1/VerticalCounter_9_rstpot)
+     FD:D                      0.102          vgaDisplay1/VerticalCounter_9
     ----------------------------------------
-    Total                      4.889ns (1.367ns logic, 3.522ns route)
-                                       (28.0% logic, 72.0% route)
+    Total                      4.920ns (1.367ns logic, 3.553ns route)
+                                       (27.8% logic, 72.2% route)
 
 =========================================================================
 Timing constraint: Default OFFSET IN BEFORE for Clock 'clk'
-  Total number of paths / destination ports: 62 / 62
+  Total number of paths / destination ports: 78 / 68
 -------------------------------------------------------------------------
-Offset:              4.373ns (Levels of Logic = 2)
+Offset:              4.600ns (Levels of Logic = 3)
   Source:            btnr (PAD)
   Destination:       vgaDisplay1/VerticalCounter_9 (FF)
   Destination Clock: clk rising
@@ -548,16 +551,17 @@ Offset:              4.373ns (Levels of Logic = 2)
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     IBUF:I->O            40   1.222   1.770  btnr_IBUF (btnr_IBUF)
-     LUT6:I0->O           10   0.203   0.856  vgaDisplay1/_n0145_inv (vgaDisplay1/_n0145_inv)
-     FDE:CE                    0.322          vgaDisplay1/VerticalCounter_0
+     IBUF:I->O            65   1.222   2.011  btnr_IBUF (btnr_IBUF)
+     LUT6:I0->O           10   0.203   0.857  vgaDisplay1/_n0081 (vgaDisplay1/_n0081)
+     LUT5:I4->O            1   0.205   0.000  vgaDisplay1/VerticalCounter_9_rstpot (vgaDisplay1/VerticalCounter_9_rstpot)
+     FD:D                      0.102          vgaDisplay1/VerticalCounter_9
     ----------------------------------------
-    Total                      4.373ns (1.747ns logic, 2.626ns route)
-                                       (40.0% logic, 60.0% route)
+    Total                      4.600ns (1.732ns logic, 2.868ns route)
+                                       (37.7% logic, 62.3% route)
 
 =========================================================================
 Timing constraint: Default OFFSET OUT AFTER for Clock 'clk'
-  Total number of paths / destination ports: 180 / 15
+  Total number of paths / destination ports: 184 / 19
 -------------------------------------------------------------------------
 Offset:              6.271ns (Levels of Logic = 3)
   Source:            tbc1/S_0 (FF)
@@ -577,6 +581,24 @@ Offset:              6.271ns (Levels of Logic = 3)
                                        (54.6% logic, 45.4% route)
 
 =========================================================================
+Timing constraint: Default path analysis
+  Total number of paths / destination ports: 1 / 1
+-------------------------------------------------------------------------
+Delay:               4.372ns (Levels of Logic = 2)
+  Source:            clk (PAD)
+  Destination:       JD0 (PAD)
+
+  Data Path: clk to JD0
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O             1   1.222   0.579  clk_IBUF (JD0_OBUF)
+     OBUF:I->O                 2.571          JD0_OBUF (JD0)
+    ----------------------------------------
+    Total                      4.372ns (3.793ns logic, 0.579ns route)
+                                       (86.8% logic, 13.2% route)
+
+=========================================================================
 
 Cross Clock Domains Report:
 --------------------------
@@ -586,21 +608,21 @@ Clock to Setup on destination clock clk
                | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
 Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
 ---------------+---------+---------+---------+---------+
-clk            |    4.889|         |         |         |
+clk            |    4.920|         |         |         |
 ---------------+---------+---------+---------+---------+
 
 =========================================================================
 
 
 Total REAL time to Xst completion: 7.00 secs
-Total CPU time to Xst completion: 6.86 secs
+Total CPU time to Xst completion: 6.87 secs
  
 --> 
 
 
-Total memory usage is 377136 kilobytes
+Total memory usage is 377108 kilobytes
 
 Number of errors   :    0 (   0 filtered)
-Number of warnings :   33 (   0 filtered)
-Number of infos    :    7 (   0 filtered)
+Number of warnings :   28 (   0 filtered)
+Number of infos    :    8 (   0 filtered)
 
