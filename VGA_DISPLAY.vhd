@@ -24,7 +24,7 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 entity VGA_DISPLAY is
     Port ( RST, CLK		: in	STD_LOGIC;
-			  PixelClock	: out	STD_LOGIC;
+			  AnimClock		: in	STD_LOGIC;
            RED      		: out  	STD_LOGIC_VECTOR(2 downto 0); -- 3 bits
            GREEN    		: out  	STD_LOGIC_VECTOR(2 downto 0); -- 3 bits
            BLUE     		: out  	STD_LOGIC_VECTOR(1 downto 0); -- 2 bits
@@ -65,21 +65,27 @@ end VGA_DISPLAY;
 
 architecture Behavioral of VGA_DISPLAY is
 		--SIGNAL TMP	: STD_LOGIC;
-		SIGNAL HorizontalCounter: INTEGER RANGE 0 TO 3199:= 0; -- 3199 800 col total
-      SIGNAL VerticalCounter: INTEGER RANGE 0 TO 520 := 0; -- 521 rows total
-      SIGNAL PixelClockCounter: STD_LOGIC_VECTOR(1 downto 0); -- 2 bits to count to 4
+		SIGNAL HorizontalCounter: STD_LOGIC_VECTOR(11 downto 0); -- 3199 800 col total
+      SIGNAL VerticalCounter: STD_LOGIC_VECTOR(11 downto 0); -- 521 rows total
 		SIGNAL Vblanking: STD_LOGIC;
 		SIGNAL Hblanking: STD_LOGIC;
-      SIGNAL PixelClock_INT: STD_LOGIC;
+      SIGNAL RED_Buf_INT: STD_LOGIC_VECTOR(2 downto 0);
+      SIGNAL GREEN_Buf_INT: STD_LOGIC_VECTOR(2 downto 0);
+		SIGNAL BLUE_Buf_INT: STD_LOGIC_VECTOR(1 downto 0);
+		SIGNAL AnimCounter: STD_LOGIC_VECTOR(2 downto 0);
+
 
 begin
-	PRO_VGA_DISPLAY : process (RST, CLK) -- Reset is an Sync signal
+	PRO_VGA_DISPLAY : process (RST, CLK, AnimClock) -- Reset is and Sync signal
 	begin
 			if (RST = '1') THEN
             --RESET 
 			elsif rising_edge(CLK) THEN--(CLK'event and CLK='1') THEN
 				
-            
+				if (AnimClock = '1') THEN
+					AnimCounter <= AnimCounter + 1;
+				end if;
+				
 				if (VerticalCounter < 479) THEN
                 -- V Display
 					V_SYNC <= '1';
@@ -122,11 +128,11 @@ begin
 				if (HorizontalCounter < 3199) THEN
 					HorizontalCounter <= HorizontalCounter + 1;
 				else
-					HorizontalCounter <= 0;
+					HorizontalCounter <= x"000";
 					if (VerticalCounter < 520) THEN
 						VerticalCounter <= VerticalCounter + 1;
 					else
-						VerticalCounter <= 0;
+						VerticalCounter <= x"000";
 					end if;
 				end if;
 							
@@ -134,13 +140,15 @@ begin
 				--	PixelClock_INT <= not(PixelClock_INT);
 				--	
 				--end if;
-				PixelClockCounter <= PixelClockCounter + 1;
-				PixelClock_INT <= PixelClockCounter(1);
 				
 				if (Hblanking = '0' and Vblanking = '0') THEN
-					RED <= "111";
-					GREEN <= "000";
-					BLUE <= "00";
+					RED_Buf_INT <= VerticalCounter(4 downto 2);
+					GREEN_Buf_INT <= HorizontalCounter(6 downto 4);
+					BLUE_Buf_INT <= HorizontalCounter(5 downto 4);
+					--RED_Buf_INT <= RED_Buf_INT;
+					RED <= RED_Buf_INT - AnimCounter;
+					GREEN <= GREEN_Buf_INT - AnimCounter;
+					BLUE <= BLUE_Buf_INT - AnimCounter(1 downto 0);
 				else
 					RED <= "000";
 					GREEN <= "000";
@@ -148,7 +156,6 @@ begin
 				end if;
 			end if;
 				
-			PixelClock <= PixelClock_INT;	
 	end process PRO_VGA_DISPLAY;
 
 	--S <= TMP;

@@ -1,7 +1,7 @@
 Release 14.7 - par P.20131013 (lin64)
 Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
-Tue Sep 21 18:28:41 2021
+Thu Sep 23 17:08:04 2021
 
 
 INFO: The IO information is provided in three file formats as part of the Place and Route (PAR) process.  These formats are:
@@ -102,7 +102,7 @@ Pinout by Pin Number:
 |E8        |           |IOBS     |IO_L9N_0                     |UNUSED   |           |0             |          |         |           |         |         |          |           |                |
 |E9        |           |         |VCCAUX                       |         |           |              |          |         |           |         |2.5      |          |           |                |
 |E10       |           |         |VCCO_0                       |         |           |0             |          |         |           |         |3.30     |          |           |                |
-|E11       |JD3        |IOB      |IO_L42N_0                    |OUTPUT   |LVCMOS33   |0             |12        |SLOW     |           |         |         |LOCATED   |NO         |NONE            |
+|E11       |JD_OUT<1>  |IOB      |IO_L42N_0                    |OUTPUT   |LVCMOS33   |0             |12        |SLOW     |           |         |         |LOCATED   |NO         |NONE            |
 |E12       |           |IOBS     |IO_L51N_0                    |UNUSED   |           |0             |          |         |           |         |         |          |           |                |
 |E13       |           |IOBS     |IO_L63N_SCP6_0               |UNUSED   |           |0             |          |         |           |         |         |          |           |                |
 |E14       |           |         |VCCAUX                       |         |           |              |          |         |           |         |2.5      |          |           |                |
@@ -119,8 +119,8 @@ Pinout by Pin Number:
 |F7        |           |IOBM     |IO_L7P_0                     |UNUSED   |           |0             |          |         |           |         |         |          |           |                |
 |F8        |           |IOBS     |IO_L32N_0                    |UNUSED   |           |0             |          |         |           |         |         |          |           |                |
 |F9        |           |IOBS     |IO_L38N_VREF_0               |UNUSED   |           |0             |          |         |           |         |         |          |           |                |
-|F10       |JD1        |IOB      |IO_L40N_0                    |OUTPUT   |LVCMOS33   |0             |12        |SLOW     |           |         |         |LOCATED   |NO         |NONE            |
-|F11       |JD2        |IOB      |IO_L42P_0                    |OUTPUT   |LVCMOS33   |0             |12        |SLOW     |           |         |         |LOCATED   |NO         |NONE            |
+|F10       |JD_IN<0>   |IOB      |IO_L40N_0                    |INPUT    |LVCMOS33   |0             |          |         |           |NONE     |         |LOCATED   |NO         |NONE            |
+|F11       |JD_IN<1>   |IOB      |IO_L42P_0                    |INPUT    |LVCMOS33   |0             |          |         |           |NONE     |         |LOCATED   |NO         |NONE            |
 |F12       |           |IOBM     |IO_L51P_0                    |UNUSED   |           |0             |          |         |           |         |         |          |           |                |
 |F13       |           |IOBM     |IO_L63P_SCP7_0               |UNUSED   |           |0             |          |         |           |         |         |          |           |                |
 |F14       |           |IOBM     |IO_L30P_A21_M1RESET_1        |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
@@ -138,7 +138,7 @@ Pinout by Pin Number:
 |G8        |           |IOBM     |IO_L32P_0                    |UNUSED   |           |0             |          |         |           |         |         |          |           |                |
 |G9        |           |IOBM     |IO_L38P_0                    |UNUSED   |           |0             |          |         |           |         |         |          |           |                |
 |G10       |           |         |VCCAUX                       |         |           |              |          |         |           |         |2.5      |          |           |                |
-|G11       |JD0        |IOB      |IO_L40P_0                    |OUTPUT   |LVCMOS33   |0             |12        |SLOW     |           |         |         |LOCATED   |NO         |NONE            |
+|G11       |JD_OUT<0>  |IOB      |IO_L40P_0                    |OUTPUT   |LVCMOS33   |0             |12        |SLOW     |           |         |         |LOCATED   |NO         |NONE            |
 |G12       |           |         |GND                          |         |           |              |          |         |           |         |         |          |           |                |
 |G13       |           |IOBS     |IO_L32N_A16_M1A9_1           |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
 |G14       |           |IOBS     |IO_L30N_A20_M1A11_1          |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
