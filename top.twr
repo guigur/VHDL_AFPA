@@ -3,10 +3,10 @@ Release 14.7 Trace  (lin64)
 Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
 /home/Xilinx/14.7/ISE_DS/ISE/bin/lin64/unwrapped/trce -intstyle ise -v 3 -s 3
--n 3 -fastpaths -xml top.twx top.ncd -o top.twr top.pcf -ucf top.ucf
+-n 3 -fastpaths -xml TOP.twx TOP.ncd -o TOP.twr TOP.pcf -ucf top.ucf
 
-Design file:              top.ncd
-Physical constraint file: top.pcf
+Design file:              TOP.ncd
+Physical constraint file: TOP.pcf
 Device,package,speed:     xc6slx16,csg324,C,-3 (PRODUCTION 1.23 2013-10-13)
 Report level:             verbose report
 
@@ -31,77 +31,63 @@ Data Sheet report:
 -----------------
 All values displayed in nanoseconds (ns)
 
-Pad to Pad
----------------+---------------+---------+
-Source Pad     |Destination Pad|  Delay  |
----------------+---------------+---------+
-sw<0>          |seg<0>         |    9.536|
-sw<0>          |seg<1>         |    9.369|
-sw<0>          |seg<2>         |    9.126|
-sw<0>          |seg<3>         |    8.620|
-sw<0>          |seg<4>         |    8.107|
-sw<0>          |seg<5>         |    8.732|
-sw<0>          |seg<6>         |    9.295|
-sw<1>          |seg<0>         |    9.518|
-sw<1>          |seg<1>         |    9.351|
-sw<1>          |seg<2>         |    9.440|
-sw<1>          |seg<3>         |    8.934|
-sw<1>          |seg<4>         |    8.973|
-sw<1>          |seg<5>         |    9.001|
-sw<1>          |seg<6>         |    9.564|
-sw<2>          |seg<0>         |    9.825|
-sw<2>          |seg<1>         |    9.658|
-sw<2>          |seg<2>         |    9.596|
-sw<2>          |seg<3>         |    9.090|
-sw<2>          |seg<4>         |    8.881|
-sw<2>          |seg<5>         |    9.142|
-sw<2>          |seg<6>         |    9.705|
-sw<3>          |seg<0>         |    9.737|
-sw<3>          |seg<1>         |    9.570|
-sw<3>          |seg<2>         |    9.604|
-sw<3>          |seg<3>         |    9.098|
-sw<3>          |seg<4>         |    8.694|
-sw<3>          |seg<5>         |    8.908|
-sw<3>          |seg<6>         |    9.471|
-sw<4>          |seg<0>         |    8.622|
-sw<4>          |seg<1>         |    8.934|
-sw<4>          |seg<2>         |    8.515|
-sw<4>          |seg<3>         |    8.259|
-sw<4>          |seg<4>         |    8.611|
-sw<4>          |seg<5>         |    8.458|
-sw<4>          |seg<6>         |    8.474|
-sw<5>          |seg<0>         |    8.415|
-sw<5>          |seg<1>         |    8.580|
-sw<5>          |seg<2>         |    8.542|
-sw<5>          |seg<3>         |    8.376|
-sw<5>          |seg<4>         |    8.353|
-sw<5>          |seg<5>         |    8.511|
-sw<5>          |seg<6>         |    8.594|
-sw<6>          |seg<0>         |    8.764|
-sw<6>          |seg<1>         |    8.933|
-sw<6>          |seg<2>         |    8.523|
-sw<6>          |seg<3>         |    8.280|
-sw<6>          |seg<4>         |    8.259|
-sw<6>          |seg<5>         |    8.525|
-sw<6>          |seg<6>         |    8.667|
-sw<7>          |seg<0>         |    9.297|
-sw<7>          |seg<1>         |    9.345|
-sw<7>          |seg<2>         |    8.703|
-sw<7>          |seg<3>         |    8.831|
-sw<7>          |seg<4>         |    8.440|
-sw<7>          |seg<5>         |    9.108|
-sw<7>          |seg<6>         |    8.848|
----------------+---------------+---------+
+Setup/Hold to clock clk
+------------+------------+------------+------------+------------+------------------+--------+
+            |Max Setup to|  Process   |Max Hold to |  Process   |                  | Clock  |
+Source      | clk (edge) |   Corner   | clk (edge) |   Corner   |Internal Clock(s) | Phase  |
+------------+------------+------------+------------+------------+------------------+--------+
+btnr        |    8.810(R)|      SLOW  |   -0.644(R)|      SLOW  |clk_BUFGP         |   0.000|
+------------+------------+------------+------------+------------+------------------+--------+
+
+Clock clk to Pad
+------------+-----------------+------------+-----------------+------------+------------------+--------+
+            |Max (slowest) clk|  Process   |Min (fastest) clk|  Process   |                  | Clock  |
+Destination |  (edge) to PAD  |   Corner   |  (edge) to PAD  |   Corner   |Internal Clock(s) | Phase  |
+------------+-----------------+------------+-----------------+------------+------------------+--------+
+Hsync       |         9.103(R)|      SLOW  |         5.163(R)|      FAST  |clk_BUFGP         |   0.000|
+JD_OUT<0>   |         8.413(R)|      SLOW  |         4.725(R)|      FAST  |clk_BUFGP         |   0.000|
+JD_OUT<1>   |         8.395(R)|      SLOW  |         4.717(R)|      FAST  |clk_BUFGP         |   0.000|
+Led<0>      |         8.661(R)|      SLOW  |         4.899(R)|      FAST  |clk_BUFGP         |   0.000|
+Led<1>      |         8.716(R)|      SLOW  |         4.941(R)|      FAST  |clk_BUFGP         |   0.000|
+Vsync       |         9.016(R)|      SLOW  |         5.104(R)|      FAST  |clk_BUFGP         |   0.000|
+an<0>       |         8.256(R)|      SLOW  |         4.510(R)|      FAST  |clk_BUFGP         |   0.000|
+an<1>       |         8.470(R)|      SLOW  |         4.655(R)|      FAST  |clk_BUFGP         |   0.000|
+an<2>       |         8.447(R)|      SLOW  |         4.644(R)|      FAST  |clk_BUFGP         |   0.000|
+an<3>       |         8.460(R)|      SLOW  |         4.658(R)|      FAST  |clk_BUFGP         |   0.000|
+seg<0>      |         9.671(R)|      SLOW  |         4.777(R)|      FAST  |clk_BUFGP         |   0.000|
+seg<1>      |         9.720(R)|      SLOW  |         4.800(R)|      FAST  |clk_BUFGP         |   0.000|
+seg<2>      |         9.953(R)|      SLOW  |         5.041(R)|      FAST  |clk_BUFGP         |   0.000|
+seg<3>      |        10.151(R)|      SLOW  |         5.057(R)|      FAST  |clk_BUFGP         |   0.000|
+seg<4>      |         9.781(R)|      SLOW  |         4.989(R)|      FAST  |clk_BUFGP         |   0.000|
+seg<5>      |         9.922(R)|      SLOW  |         5.018(R)|      FAST  |clk_BUFGP         |   0.000|
+seg<6>      |        10.088(R)|      SLOW  |         4.999(R)|      FAST  |clk_BUFGP         |   0.000|
+vgaBlue<0>  |         8.633(R)|      SLOW  |         4.845(R)|      FAST  |clk_BUFGP         |   0.000|
+vgaBlue<1>  |         8.685(R)|      SLOW  |         4.869(R)|      FAST  |clk_BUFGP         |   0.000|
+vgaGreen<0> |         8.185(R)|      SLOW  |         4.579(R)|      FAST  |clk_BUFGP         |   0.000|
+vgaGreen<1> |         8.287(R)|      SLOW  |         4.653(R)|      FAST  |clk_BUFGP         |   0.000|
+vgaGreen<2> |         8.206(R)|      SLOW  |         4.597(R)|      FAST  |clk_BUFGP         |   0.000|
+vgaRed<0>   |         8.393(R)|      SLOW  |         4.702(R)|      FAST  |clk_BUFGP         |   0.000|
+vgaRed<1>   |         8.342(R)|      SLOW  |         4.681(R)|      FAST  |clk_BUFGP         |   0.000|
+vgaRed<2>   |         8.295(R)|      SLOW  |         4.640(R)|      FAST  |clk_BUFGP         |   0.000|
+------------+-----------------+------------+-----------------+------------+------------------+--------+
+
+Clock to Setup on destination clock clk
+---------------+---------+---------+---------+---------+
+               | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+---------------+---------+---------+---------+---------+
+clk            |    4.248|         |         |         |
+---------------+---------+---------+---------+---------+
 
 
-Analysis completed Tue Sep 14 14:10:32 2021 
+Analysis completed Thu Sep 23 17:08:09 2021 
 --------------------------------------------------------------------------------
 
 Trace Settings:
 -------------------------
 Trace Settings 
 
-Peak Memory Usage: 377 MB
+Peak Memory Usage: 379 MB
 
 
 

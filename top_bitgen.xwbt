@@ -1,8 +1,8 @@
 INTSTYLE=ise
-INFILE=/home/stetd/first-test/top.ncd
-OUTFILE=/home/stetd/first-test/top.bit
+INFILE=/home/stetd/Documents/github/VHDL_AFPA/TOP.ncd
+OUTFILE=/home/stetd/Documents/github/VHDL_AFPA/TOP.bit
 FAMILY=Spartan6
 PART=xc6slx16-3csg324
-WORKINGDIR=/home/stetd/first-test
+WORKINGDIR=/home/stetd/Documents/github/VHDL_AFPA
 LICENSE=WebPack
 USER_INFO=174133039_202014052_0_911

@@ -23,11 +23,11 @@ use ieee.std_logic_unsigned.all; --Magic library to add numbers
 
 
 entity PROCESS_PMOD is
-    Port ( RST, CLK		: in	STD_LOGIC;
-			  CE, SD			: in	STD_LOGIC; -- CE is 20 MHz -- SD choose the channel
-           D0, D1  		: in	STD_LOGIC;
-			  PMOD_CLK, CS : out STD_LOGIC;
-			  DATA			: out STD_LOGIC_VECTOR(11 downto 0) -- 12 bits
+    Port ( RST, CLK	: in	STD_LOGIC;
+	  CE, SD		: in	STD_LOGIC; -- CE is 20 MHz -- SD choose the channel
+           D0, D1  	: in	STD_LOGIC;
+	   PMOD_CLK, CS	: out 	STD_LOGIC;
+	   DATA		: out 	STD_LOGIC_VECTOR(11 downto 0) -- 12 bits
     );
 end PROCESS_PMOD;
 -----------------------------------------
@@ -35,7 +35,7 @@ end PROCESS_PMOD;
 -- The clock is divided by 6 -> 100Mhz/6 = 16.66Mhz
 -- One period is 60ns
 -- TQuiet is min 50ns min
--- The packetPulse signal have to count to a minum of 16 bits + Tquiet
+-- The packetPulse signal have to count to a minimum of 16 bits + Tquiet
 -- packetPulse will count to 256 for a first test
 
 -----------------------------------------
@@ -49,22 +49,21 @@ begin
 
 	PRO_PROCESS_PMOD : process (RST, CLK)
 	begin
-			if (RST = '1') THEN
-            --RESET 
-			elsif rising_edge(CLK) THEN
-				if (PacketPulseCounter < 96) THEN
-					--DATA time
-					--elsif (PacketPulseCounter)
-					CS <= '0';
-					PMOD_CLK <= PMOD_CLK_INT;
+		if (RST = '1') THEN
+            		--RESET 
+		elsif rising_edge(CLK) THEN
+			if (PacketPulseCounter < 96) THEN
+				--DATA time
+				CS <= '0';
+				PMOD_CLK <= PMOD_CLK_INT;
 					
-				else
-					CS <= '1';
-					PMOD_CLK <= '1';
-				end if;
-				PacketPulseCounter <= PacketPulseCounter + 1;
-				--CountState <= '1';
+			else
+				CS <= '1';
+				PMOD_CLK <= '1';
 			end if;
+			PacketPulseCounter <= PacketPulseCounter + 1;
+			--CountState <= '1';
+		end if;
 	end process PRO_PROCESS_PMOD;
 	
 	PRO_DIV_CLK : process (RST, CLK)
