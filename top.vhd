@@ -37,6 +37,7 @@ entity TOP is
 				vgaBlue     : out STD_LOGIC_VECTOR(1 downto 0); -- 2 bits
 				Hsync   		: out STD_LOGIC;
 				Vsync   		: out STD_LOGIC;
+				
 				JD_OUT		: out STD_LOGIC_VECTOR(1 downto 0);
 				JD_IN			: in 	STD_LOGIC_VECTOR(1 downto 0)
 		);
