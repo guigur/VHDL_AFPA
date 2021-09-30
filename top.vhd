@@ -77,7 +77,12 @@ architecture Behavioral of TOP is
 						 DATA				: out STD_LOGIC_VECTOR(11 downto 0) -- 12 bits
 				);
 		END COMPONENT;
-		
+		component BIN_TO_BCD is
+				port( 
+						BIN : in  STD_LOGIC_VECTOR(11 downto 0);
+						BCD : out  STD_LOGIC_VECTOR(15 downto 0)
+					);
+		end component;
 --		COMPONENT D_LATCH 
 --				PORT (
 --						D, CLK	: in  STD_LOGIC;
@@ -136,9 +141,15 @@ architecture Behavioral of TOP is
 			count_speed: CLOCK_DIV
 					port map(RST=>btnr, CLK=>CLK, SPEED=>9999999, S=>DIGIT_COUNTER_INTERNAL);
 
-			bcd1: BCD_COUNTER
-					port map(CLK=>CLK, INC=>DIGIT_COUNTER_INTERNAL, S=>DIGITS_VAL_INTERNAL);
+			--Compteur BCD
+			--bcd1: BCD_COUNTER
+			--		port map(CLK=>CLK, INC=>DIGIT_COUNTER_INTERNAL, S=>DIGITS_VAL_INTERNAL);
+			
+			--Binaire -> BCD
+			bin2bcd1: BIN_TO_BCD
+					port map(BIN=>"000011110000", BCD=>DIGITS_VAL_INTERNAL);
 					
+			--Affichage BCD-> 7 seg
 			decoder1: SEG_DECODER_DEC
 					port map(val=>DIGITS_VAL_INTERNAL, dis=>COUNT_INTERNAL, seg=>seg, an=>an);
 			
