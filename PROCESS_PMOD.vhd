@@ -45,6 +45,7 @@ SIGNAL DIVCounter: STD_LOGIC_VECTOR(1 downto 0); -- 3 bits to count to 5
 SIGNAL PMOD_CLK_INT : STD_LOGIC;
 --SIGNAL CountState : STD_LOGIC;
 SIGNAL PacketPulseCounter: STD_LOGIC_VECTOR(7 downto 0);-- 
+SIGNAL DATA_Shift		:  	STD_LOGIC_VECTOR(11 downto 0);
 begin
 
 	PRO_PROCESS_PMOD : process (RST, CLK)
@@ -56,7 +57,9 @@ begin
 				--DATA time
 				CS <= '0';
 				PMOD_CLK <= PMOD_CLK_INT;
+				if (PMOD_CLK = '1') THEN
 					
+				end if;				
 			else
 				CS <= '1';
 				PMOD_CLK <= '1';
@@ -76,7 +79,6 @@ begin
 			end if;
 		end if;
 	end process PRO_DIV_CLK;
-	--D0<='0';
-	--D1<='1';
+
 end Behavioral;
 

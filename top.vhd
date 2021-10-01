@@ -39,7 +39,9 @@ entity TOP is
 				Vsync   		: out STD_LOGIC;
 				
 				JD_OUT		: out STD_LOGIC_VECTOR(1 downto 0);
-				JD_IN			: in 	STD_LOGIC_VECTOR(1 downto 0)
+				JD_IN			: in 	STD_LOGIC_VECTOR(1 downto 0);
+				JD    		: out STD_LOGIC
+
 		);
 end TOP;
 
@@ -135,6 +137,8 @@ architecture Behavioral of TOP is
 			clockdiv1: CLOCK_DIV
 					port map(RST=>btnr, CLK=>CLK, SPEED=>99999, S=>CLK_DIV_INTERNAL);
 
+			JD <= CLK_DIV_INTERNAL;
+			
 			tbc1: TWO_BITS_COUNTER
 					port map(E=>CLK_DIV_INTERNAL, CLK=>CLK, S=>COUNT_INTERNAL);
 
@@ -145,11 +149,11 @@ architecture Behavioral of TOP is
 			--bcd1: BCD_COUNTER
 			--		port map(CLK=>CLK, INC=>DIGIT_COUNTER_INTERNAL, S=>DIGITS_VAL_INTERNAL);
 			
-			--Binaire -> BCD
+			-- Binary -> BCD
 			bin2bcd1: BIN_TO_BCD
 					port map(BIN=>"110010001010", BCD=>DIGITS_VAL_INTERNAL);
 					
-			--Affichage BCD-> 7 seg
+			-- BCD -> 7 seg display 
 			decoder1: SEG_DECODER_DEC
 					port map(val=>DIGITS_VAL_INTERNAL, dis=>COUNT_INTERNAL, seg=>seg, an=>an);
 			

@@ -55,7 +55,6 @@ end BIN_TO_BCD;
 	SIGNAL out_17 : STD_LOGIC_VECTOR(3 downto 0);
 	SIGNAL out_18 : STD_LOGIC_VECTOR(3 downto 0);
 begin
-	--BCD(15 downto 4) <= x"000";
 	
 	add3_1: ADD3
 			port map(data_in=>'0' & BIN(11 downto 9), data_out=>out_1);
