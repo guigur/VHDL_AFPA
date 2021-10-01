@@ -147,7 +147,7 @@ architecture Behavioral of TOP is
 			
 			--Binaire -> BCD
 			bin2bcd1: BIN_TO_BCD
-					port map(BIN=>"000011110000", BCD=>DIGITS_VAL_INTERNAL);
+					port map(BIN=>"110010001010", BCD=>DIGITS_VAL_INTERNAL);
 					
 			--Affichage BCD-> 7 seg
 			decoder1: SEG_DECODER_DEC
