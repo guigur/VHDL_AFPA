@@ -57,9 +57,7 @@ begin
 				--DATA time
 				CS <= '0';
 				PMOD_CLK <= PMOD_CLK_INT;
-				if (PMOD_CLK = '1') THEN
-					
-				end if;				
+				  
 			else
 				CS <= '1';
 				PMOD_CLK <= '1';
