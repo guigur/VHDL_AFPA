@@ -23,13 +23,14 @@ use ieee.std_logic_unsigned.all; --Magic library to add numbers
 
 
 entity PROCESS_PMOD is
-    Port ( RST, CLK	: in	STD_LOGIC;
-	  CE, SD		: in	STD_LOGIC; -- CE is 20 MHz -- SD choose the channel
-           D0, D1  	: in	STD_LOGIC;
-	   PMOD_CLK, CS	: out 	STD_LOGIC;
-	   DATA		: out 	STD_LOGIC_VECTOR(11 downto 0) -- 12 bits
-    );
+	Port(	RST, CLK, CE1ms: in	STD_LOGIC;
+			CE, SD			: in	STD_LOGIC; -- CE is 20 MHz -- SD choose the channel
+			D0, D1  			: in	STD_LOGIC;
+			PMOD_CLK, CS	: out STD_LOGIC;
+			DATA				: out STD_LOGIC_VECTOR(11 downto 0) -- 12 bits
+	);
 end PROCESS_PMOD;
+
 -----------------------------------------
 
 -- The clock is divided by 6 -> 100Mhz/6 = 16.66Mhz
@@ -39,44 +40,53 @@ end PROCESS_PMOD;
 -- packetPulse will count to 256 for a first test
 
 -----------------------------------------
+
 architecture Behavioral of PROCESS_PMOD is
-SIGNAL PacketNumber: STD_LOGIC_VECTOR(4 downto 0); -- 5 bits to count to 15
-SIGNAL DIVCounter: STD_LOGIC_VECTOR(1 downto 0); -- 3 bits to count to 5
+SIGNAL counterBit: STD_LOGIC_VECTOR(4 downto 0); -- 5 bits to count to 15
+SIGNAL counter16MHz: STD_LOGIC_VECTOR(2 downto 0); -- 3 bits to count to 5
+
 SIGNAL PMOD_CLK_INT : STD_LOGIC;
---SIGNAL CountState : STD_LOGIC;
-SIGNAL PacketPulseCounter: STD_LOGIC_VECTOR(7 downto 0);-- 
+--SIGNAL CE1ms : STD_LOGIC;
+--SIGNAL PacketPulseCounter: STD_LOGIC_VECTOR(7 downto 0);-- 
 SIGNAL DATA_Shift		:  	STD_LOGIC_VECTOR(11 downto 0);
 begin
 
 	PRO_PROCESS_PMOD : process (RST, CLK)
 	begin
 		if (RST = '1') THEN
-            		--RESET 
+			counterBit <= "00000";
 		elsif rising_edge(CLK) THEN
-			if (PacketPulseCounter < 96) THEN
-				--DATA time
-				CS <= '0';
-				PMOD_CLK <= PMOD_CLK_INT;
-				  
+			if (CE1ms = '1') THEN
+				counterBit <= "00000";
+			elsif (counterBit < 16  and counter16MHz = "000") THEN
+				DATA_Shift <= DATA_Shift(10 downto 0) & D0;
+				counterBit <= counterBit + 1;
 			else
-				CS <= '1';
-				PMOD_CLK <= '1';
+				DATA <= DATA_Shift;
 			end if;
-			PacketPulseCounter <= PacketPulseCounter + 1;
-			--CountState <= '1';
 		end if;
 	end process PRO_PROCESS_PMOD;
 	
-	PRO_DIV_CLK : process (RST, CLK)
+	--------CE1ms <= '1' when counter16MHz = 2 else '0';
+	
+	CS <= '0' when counterBit < 16 else '1';
+	
+	PMOD_CLK <= PMOD_CLK_INT when counterBit < 16 else '1';
+	
+	PRO_16MHz_CLK : process (RST, CLK)
 	begin
-		if rising_edge(CLK) THEN
-			DIVCounter <= DIVCounter + 1;
-			if (DIVCounter = "10") THEN
-				DIVCounter <= "00";
-				PMOD_CLK_INT <= not(PMOD_CLK_INT);
+		if (RST = '1') THEN
+			counter16MHz <= "000";
+		elsif rising_edge(CLK) THEN
+			if (counter16MHz >= "110") THEN
+				counter16MHz <= "000";
+				PMOD_CLK_INT <= '0';
+			elsif (counter16MHz = "011") THEN
+				PMOD_CLK_INT <= '1';
 			end if;
+			counter16MHz <= counter16MHz + 1;
 		end if;
-	end process PRO_DIV_CLK;
-
+	end process PRO_16MHz_CLK;
+	
 end Behavioral;
 

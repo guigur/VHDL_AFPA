@@ -1,7 +1,7 @@
 Release 14.7 - par P.20131013 (lin64)
 Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
-Fri Oct  1 09:32:30 2021
+Mon Oct  4 16:49:55 2021
 
 
 INFO: The IO information is provided in three file formats as part of the Place and Route (PAR) process.  These formats are:
@@ -67,7 +67,7 @@ Pinout by Pin Number:
 |C9        |btnd       |IOB      |IO_L34N_GCLK18_0             |INPUT    |LVCMOS33   |0             |          |         |           |NONE     |         |LOCATED   |NO         |NONE            |
 |C10       |           |IOBM     |IO_L37P_GCLK13_0             |UNUSED   |           |0             |          |         |           |         |         |          |           |                |
 |C11       |           |IOBS     |IO_L36N_GCLK14_0             |UNUSED   |           |0             |          |         |           |         |         |          |           |                |
-|C12       |           |IOBS     |IO_L47N_0                    |UNUSED   |           |0             |          |         |           |         |         |          |           |                |
+|C12       |JD_OUT<2>  |IOB      |IO_L47N_0                    |OUTPUT   |LVCMOS33   |0             |12        |SLOW     |           |         |         |LOCATED   |NO         |NONE            |
 |C13       |           |IOBM     |IO_L50P_0                    |UNUSED   |           |0             |          |         |           |         |         |          |           |                |
 |C14       |           |IOBS     |IO_L65N_SCP2_0               |UNUSED   |           |0             |          |         |           |         |         |          |           |                |
 |C15       |           |IOBM     |IO_L64P_SCP5_0               |UNUSED   |           |0             |          |         |           |         |         |          |           |                |
@@ -85,7 +85,7 @@ Pinout by Pin Number:
 |D9        |btnr       |IOB      |IO_L34P_GCLK19_0             |INPUT    |LVCMOS33   |0             |          |         |           |NONE     |         |LOCATED   |NO         |NONE            |
 |D10       |           |         |GND                          |         |           |              |          |         |           |         |         |          |           |                |
 |D11       |           |IOBM     |IO_L36P_GCLK15_0             |UNUSED   |           |0             |          |         |           |         |         |          |           |                |
-|D12       |JD         |IOB      |IO_L47P_0                    |OUTPUT   |LVCMOS33   |0             |12        |SLOW     |           |         |         |LOCATED   |NO         |NONE            |
+|D12       |           |IOBM     |IO_L47P_0                    |UNUSED   |           |0             |          |         |           |         |         |          |           |                |
 |D13       |           |         |VCCO_0                       |         |           |0             |          |         |           |         |3.30     |          |           |                |
 |D14       |           |IOBM     |IO_L65P_SCP3_0               |UNUSED   |           |0             |          |         |           |         |         |          |           |                |
 |D15       |           |         |TDI                          |         |           |              |          |         |           |         |         |          |           |                |

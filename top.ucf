@@ -227,8 +227,8 @@ Net "JD_OUT<0>" LOC = G11 | IOSTANDARD = LVCMOS33; #Bank = 3, pin name = IO_L40P
 Net "JD_IN<0>" LOC = F10 | IOSTANDARD = LVCMOS33; #Bank = 3, pin name = IO_L40N, Sch name = JD2
 Net "JD_IN<1>" LOC = F11 | IOSTANDARD = LVCMOS33; #Bank = 3, pin name = IO_L42P, Sch name = JD3
 Net "JD_OUT<1>" LOC = E11 | IOSTANDARD = LVCMOS33; #Bank = 3, pin name = IO_L42N, Sch name = JD4
-Net "JD" LOC = D12 | IOSTANDARD = LVCMOS33; #Bank = 3, pin name = IO_L47P, Sch name = JD7
-#Net "JD<5>" LOC = C12 | IOSTANDARD = LVCMOS33; #Bank = 3, pin name = IO_L47N, Sch name = JD8
+#Net "JD" LOC = D12 | IOSTANDARD = LVCMOS33; #Bank = 3, pin name = IO_L47P, Sch name = JD7
+Net "JD_OUT<2>" LOC = C12 | IOSTANDARD = LVCMOS33; #Bank = 3, pin name = IO_L47N, Sch name = JD8
 #Net "JD<6>" LOC = F12 | IOSTANDARD = LVCMOS33; #Bank = 3, pin name = IO_L51P, Sch name = JD9
 #Net "JD<7>" LOC = E12 | IOSTANDARD = LVCMOS33; #Bank = 3, pin name = IO_L51N, Sch name = JD10
 

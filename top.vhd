@@ -38,9 +38,8 @@ entity TOP is
 				Hsync   		: out STD_LOGIC;
 				Vsync   		: out STD_LOGIC;
 				
-				JD_OUT		: out STD_LOGIC_VECTOR(1 downto 0);
-				JD_IN			: in 	STD_LOGIC_VECTOR(1 downto 0);
-				JD    		: out STD_LOGIC
+				JD_OUT		: out STD_LOGIC_VECTOR(2 downto 0);
+				JD_IN			: in 	STD_LOGIC_VECTOR(1 downto 0)
 
 		);
 end TOP;
@@ -72,11 +71,11 @@ architecture Behavioral of TOP is
 				);
 		END COMPONENT;
 		COMPONENT PROCESS_PMOD
-				Port ( RST, CLK		: in	STD_LOGIC;
-						 CE, SD			: in	STD_LOGIC; -- CE is 20 MHz -- SD choose the channel
-						 D0, D1  		: in	STD_LOGIC;
-						 PMOD_CLK, CS	: out STD_LOGIC;
-						 DATA				: out STD_LOGIC_VECTOR(11 downto 0) -- 12 bits
+				Port ( RST, CLK, CE1ms	: in	STD_LOGIC;
+						 CE, SD				: in	STD_LOGIC; -- CE is 20 MHz -- SD choose the channel
+						 D0, D1  			: in	STD_LOGIC;
+						 PMOD_CLK, CS		: out STD_LOGIC;
+						 DATA					: out STD_LOGIC_VECTOR(11 downto 0) -- 12 bits
 				);
 		END COMPONENT;
 		component BIN_TO_BCD is
@@ -123,7 +122,7 @@ architecture Behavioral of TOP is
 		);
 		END COMPONENT;
 		
-		SIGNAL CLK_DIV_INTERNAL : std_logic;
+		SIGNAL PULSE_1ms : std_logic;
 		SIGNAL DIGIT_COUNTER_INTERNAL : std_logic;
 
 		SIGNAL COUNT_INTERNAL : std_logic_vector(1 downto 0);
@@ -135,15 +134,13 @@ architecture Behavioral of TOP is
 		--Hsync <= '1';
 		
 			clockdiv1: CLOCK_DIV
-					port map(RST=>btnr, CLK=>CLK, SPEED=>99999, S=>CLK_DIV_INTERNAL);
-
-			JD <= CLK_DIV_INTERNAL;
+					port map(RST=>btnr, CLK=>CLK, SPEED=>100000, S=>PULSE_1ms);
 			
 			tbc1: TWO_BITS_COUNTER
-					port map(E=>CLK_DIV_INTERNAL, CLK=>CLK, S=>COUNT_INTERNAL);
+					port map(E=>PULSE_1ms, CLK=>CLK, S=>COUNT_INTERNAL);
 
-			count_speed: CLOCK_DIV
-					port map(RST=>btnr, CLK=>CLK, SPEED=>9999999, S=>DIGIT_COUNTER_INTERNAL);
+			--count_speed: CLOCK_DIV
+			--		port map(RST=>btnr, CLK=>CLK, SPEED=>9999999, S=>DIGIT_COUNTER_INTERNAL);
 
 			--Compteur BCD
 			--bcd1: BCD_COUNTER
@@ -151,7 +148,7 @@ architecture Behavioral of TOP is
 			
 			-- Binary -> BCD
 			bin2bcd1: BIN_TO_BCD
-					port map(BIN=>"110010001010", BCD=>DIGITS_VAL_INTERNAL);
+					port map(BIN=>PMOD_DATA, BCD=>DIGITS_VAL_INTERNAL);
 					
 			-- BCD -> 7 seg display 
 			decoder1: SEG_DECODER_DEC
@@ -160,10 +157,16 @@ architecture Behavioral of TOP is
 			vgaDisplay1: VGA_DISPLAY
 					port map(RST=>btnr, CLK=>CLK, AnimClock=>DIGIT_COUNTER_INTERNAL, RED=>vgaRed, GREEN=>vgaGreen, BLUE=>vgaBlue, H_SYNC=>Hsync, V_SYNC=>Vsync);
 
+			
 			processAD1: PROCESS_PMOD
-					port map(RST=>btnr, CLK=>CLK, CE=>CLK_DIV_INTERNAL, SD=>'0', CS=>JD_OUT(0), D0=>JD_IN(0), D1=>JD_IN(1), PMOD_CLK=>JD_OUT(1), DATA=>PMOD_DATA);
+					port map(RST=>btnr, CLK=>CLK, CE1ms=>PULSE_1ms,
+								CE=>PULSE_1ms, SD=>'0', CS=>JD_OUT(0), 
+								D0=>JD_IN(0), D1=>JD_IN(1), PMOD_CLK=>JD_OUT(1), 
+								DATA=>PMOD_DATA);
 
 			Led <= COUNT_INTERNAL;
+			JD_OUT(2) <= PULSE_1ms;
+			
 
 			--Ledtwo <= CLK_DIV_INTERNAL;
 
