@@ -84,6 +84,12 @@ architecture Behavioral of TOP is
 						BCD : out  STD_LOGIC_VECTOR(15 downto 0)
 					);
 		end component;
+		component QUANTUM_CONV is
+				Port(
+						DATA_IN	: in STD_LOGIC_VECTOR(11 downto 0);
+						DATA_OUT	: out STD_LOGIC_VECTOR(11 downto 0)
+				);
+		end component;
 --		COMPONENT D_LATCH 
 --				PORT (
 --						D, CLK	: in  STD_LOGIC;
@@ -128,6 +134,7 @@ architecture Behavioral of TOP is
 		SIGNAL COUNT_INTERNAL : std_logic_vector(1 downto 0);
 		SIGNAL DIGITS_VAL_INTERNAL : STD_LOGIC_VECTOR(15 DOWNTO 0);
 		SIGNAL PMOD_DATA : STD_LOGIC_VECTOR(11 downto 0);
+		SIGNAL PMOD_QUANTUM_DATA : STD_LOGIC_VECTOR(11 downto 0);
 		begin
 		
 		--Vsync <= '1';
@@ -148,7 +155,7 @@ architecture Behavioral of TOP is
 			
 			-- Binary -> BCD
 			bin2bcd1: BIN_TO_BCD
-					port map(BIN=>PMOD_DATA, BCD=>DIGITS_VAL_INTERNAL);
+					port map(BIN=>PMOD_QUANTUM_DATA, BCD=>DIGITS_VAL_INTERNAL);
 					
 			-- BCD -> 7 seg display 
 			decoder1: SEG_DECODER_DEC
@@ -163,7 +170,10 @@ architecture Behavioral of TOP is
 								CE=>PULSE_1ms, SD=>'0', CS=>JD_OUT(0), 
 								D0=>JD_IN(0), D1=>JD_IN(1), PMOD_CLK=>JD_OUT(1), 
 								DATA=>PMOD_DATA);
-
+			
+			convQuantum1: QUANTUM_CONV
+					port map(DATA_IN=>PMOD_DATA, DATA_OUT=>PMOD_QUANTUM_DATA);
+					
 			Led <= COUNT_INTERNAL;
 			JD_OUT(2) <= PULSE_1ms;
 			

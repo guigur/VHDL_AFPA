@@ -41,7 +41,7 @@ end PROCESS_PMOD;
 
 -----------------------------------------
 
-architecture Behavioral of PROCESS_PMOD is
+ architecture Behavioral of PROCESS_PMOD is
 SIGNAL counterBit: STD_LOGIC_VECTOR(4 downto 0); -- 5 bits to count to 15
 SIGNAL counter16MHz: STD_LOGIC_VECTOR(2 downto 0); -- 3 bits to count to 5
 
@@ -58,11 +58,14 @@ begin
 		elsif rising_edge(CLK) THEN
 			if (CE1ms = '1') THEN
 				counterBit <= "00000";
-			elsif (counterBit < 16  and counter16MHz = "000") THEN
-				DATA_Shift <= DATA_Shift(10 downto 0) & D0;
-				counterBit <= counterBit + 1;
-			else
-				DATA <= DATA_Shift;
+			elsif	(counter16MHz = "000") THEN
+				if (counterBit < 16) THEN
+					DATA_Shift <= DATA_Shift(10 downto 0) & D0;
+					counterBit <= counterBit + 1;
+				elsif (counterBit = 16) THEN
+					DATA <= DATA_Shift;
+					counterBit <= counterBit + 1;
+				end if;
 			end if;
 		end if;
 	end process PRO_PROCESS_PMOD;
@@ -73,18 +76,29 @@ begin
 	
 	PMOD_CLK <= PMOD_CLK_INT when counterBit < 16 else '1';
 	
+	PRO_GEN_CLK_PMOD : process (CLK)
+	begin
+		if falling_edge(CLK) THEN
+			if (counter16MHz = "000") THEN
+				PMOD_CLK_INT <= '0';
+			elsif (counter16MHz = "011") THEN
+				PMOD_CLK_INT <= '1';
+			end if;
+		end if;
+	end process PRO_GEN_CLK_PMOD;
+	
 	PRO_16MHz_CLK : process (RST, CLK)
 	begin
 		if (RST = '1') THEN
 			counter16MHz <= "000";
 		elsif rising_edge(CLK) THEN
-			if (counter16MHz >= "110") THEN
-				counter16MHz <= "000";
-				PMOD_CLK_INT <= '0';
-			elsif (counter16MHz = "011") THEN
-				PMOD_CLK_INT <= '1';
+			if (counterBit < 17) THEN
+				if (counter16MHz = "101") THEN
+					counter16MHz <= "000";
+				else
+					counter16MHz <= counter16MHz + 1;
+				end if;
 			end if;
-			counter16MHz <= counter16MHz + 1;
 		end if;
 	end process PRO_16MHz_CLK;
 	
