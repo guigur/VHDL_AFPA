@@ -53,7 +53,7 @@ architecture Behavioral of TOP is
 				);
 		END COMPONENT;
 		COMPONENT SEG_DECODER_DEC
-				PORT (
+				port (
 					val	: in std_logic_vector(15 downto 0);
 					dis	: in std_logic_vector(1 downto 0);
 					seg	: out std_logic_vector(7 downto 0); --Array of the 7 digits
@@ -61,21 +61,23 @@ architecture Behavioral of TOP is
 				);
 		END COMPONENT;
 		COMPONENT VGA_DISPLAY
-				Port ( RST, CLK	: in	STD_LOGIC;
-						 AnimClock	: in	STD_LOGIC;
-						 RED      	: out	STD_LOGIC_VECTOR(2 downto 0); -- 3 bits
-						 GREEN    	: out	STD_LOGIC_VECTOR(2 downto 0); -- 3 bits
-						 BLUE     	: out	STD_LOGIC_VECTOR(1 downto 0); -- 2 bits
-						 H_SYNC   	: out	STD_LOGIC;
-						 V_SYNC   	: out	STD_LOGIC
+				port(
+						RST, CLK	: in	STD_LOGIC;
+						AnimClock	: in	STD_LOGIC;
+						RED      	: out	STD_LOGIC_VECTOR(2 downto 0); -- 3 bits
+						GREEN    	: out	STD_LOGIC_VECTOR(2 downto 0); -- 3 bits
+						BLUE     	: out	STD_LOGIC_VECTOR(1 downto 0); -- 2 bits
+						H_SYNC   	: out	STD_LOGIC;
+						V_SYNC   	: out	STD_LOGIC
 				);
 		END COMPONENT;
 		COMPONENT PROCESS_PMOD
-				Port ( RST, CLK, CE1ms	: in	STD_LOGIC;
-						 CE, SD				: in	STD_LOGIC; -- CE is 20 MHz -- SD choose the channel
-						 D0, D1  			: in	STD_LOGIC;
-						 PMOD_CLK, CS		: out STD_LOGIC;
-						 DATA					: out STD_LOGIC_VECTOR(11 downto 0) -- 12 bits
+				port( 
+						RST, CLK, CE1ms	: in	STD_LOGIC;
+						CE, SD				: in	STD_LOGIC; -- CE is 20 MHz -- SD choose the channel
+						D0, D1  				: in	STD_LOGIC;
+						PMOD_CLK, CS		: out STD_LOGIC;
+						DATA					: out STD_LOGIC_VECTOR(11 downto 0) -- 12 bits
 				);
 		END COMPONENT;
 		component BIN_TO_BCD is
@@ -88,6 +90,13 @@ architecture Behavioral of TOP is
 				Port(
 						DATA_IN	: in STD_LOGIC_VECTOR(11 downto 0);
 						DATA_OUT	: out STD_LOGIC_VECTOR(11 downto 0)
+				);
+		end component;
+		component AVERAGER is
+				Port(
+						CLK, CE1ms	: in STD_LOGIC;
+						DATA_IN		: in STD_LOGIC_VECTOR(11 downto 0);
+						DATA_OUT		: out STD_LOGIC_VECTOR(11 downto 0)
 				);
 		end component;
 --		COMPONENT D_LATCH 
@@ -135,11 +144,14 @@ architecture Behavioral of TOP is
 		SIGNAL DIGITS_VAL_INTERNAL : STD_LOGIC_VECTOR(15 DOWNTO 0);
 		SIGNAL PMOD_DATA : STD_LOGIC_VECTOR(11 downto 0);
 		SIGNAL PMOD_QUANTUM_DATA : STD_LOGIC_VECTOR(11 downto 0);
+		SIGNAL PMOD_AVERAGE_DATA : STD_LOGIC_VECTOR(11 downto 0);
 		begin
 		
 		--Vsync <= '1';
 		--Hsync <= '1';
-		
+			vgaDisplay1: VGA_DISPLAY
+					port map(RST=>btnr, CLK=>CLK, AnimClock=>DIGIT_COUNTER_INTERNAL, RED=>vgaRed, GREEN=>vgaGreen, BLUE=>vgaBlue, H_SYNC=>Hsync, V_SYNC=>Vsync);
+
 			clockdiv1: CLOCK_DIV
 					port map(RST=>btnr, CLK=>CLK, SPEED=>100000, S=>PULSE_1ms);
 			
@@ -153,16 +165,6 @@ architecture Behavioral of TOP is
 			--bcd1: BCD_COUNTER
 			--		port map(CLK=>CLK, INC=>DIGIT_COUNTER_INTERNAL, S=>DIGITS_VAL_INTERNAL);
 			
-			-- Binary -> BCD
-			bin2bcd1: BIN_TO_BCD
-					port map(BIN=>PMOD_QUANTUM_DATA, BCD=>DIGITS_VAL_INTERNAL);
-					
-			-- BCD -> 7 seg display 
-			decoder1: SEG_DECODER_DEC
-					port map(val=>DIGITS_VAL_INTERNAL, dis=>COUNT_INTERNAL, seg=>seg, an=>an);
-			
-			vgaDisplay1: VGA_DISPLAY
-					port map(RST=>btnr, CLK=>CLK, AnimClock=>DIGIT_COUNTER_INTERNAL, RED=>vgaRed, GREEN=>vgaGreen, BLUE=>vgaBlue, H_SYNC=>Hsync, V_SYNC=>Vsync);
 
 			
 			processAD1: PROCESS_PMOD
@@ -173,7 +175,20 @@ architecture Behavioral of TOP is
 			
 			convQuantum1: QUANTUM_CONV
 					port map(DATA_IN=>PMOD_DATA, DATA_OUT=>PMOD_QUANTUM_DATA);
+				
+			averager1: AVERAGER
+					port map(CLK=>CLK, CE1ms=>PULSE_1ms, 
+								DATA_IN=>PMOD_QUANTUM_DATA, DATA_OUT=>PMOD_AVERAGE_DATA);
+			
+			-- Binary -> BCD
+			bin2bcd1: BIN_TO_BCD
+					port map(BIN=>PMOD_AVERAGE_DATA, BCD=>DIGITS_VAL_INTERNAL);
 					
+			-- BCD -> 7 seg display 
+			decoder1: SEG_DECODER_DEC
+					port map(val=>DIGITS_VAL_INTERNAL, dis=>COUNT_INTERNAL, seg=>seg, an=>an);
+			
+
 			Led <= COUNT_INTERNAL;
 			JD_OUT(2) <= PULSE_1ms;
 			
