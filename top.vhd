@@ -38,7 +38,10 @@ entity TOP is
 				Hsync   		: out STD_LOGIC;
 				Vsync   		: out STD_LOGIC;
 				
-				JD_OUT		: out STD_LOGIC_VECTOR(2 downto 0);
+				RxD			: in	STD_LOGIC;
+				TxD			: out	STD_LOGIC;
+				
+				JD_OUT		: out STD_LOGIC_VECTOR(3 downto 0);
 				JD_IN			: in 	STD_LOGIC_VECTOR(1 downto 0)
 
 		);
@@ -99,6 +102,13 @@ architecture Behavioral of TOP is
 						DATA_OUT		: out STD_LOGIC_VECTOR(11 downto 0)
 				);
 		end component;
+		component SERIAL_TX is
+				port(
+						RST, CLK, CE_BAUD	: in		STD_LOGIC;
+						ASCII_CHAR			: in		STD_LOGIC_VECTOR(7 downto 0);
+						TX						: out		STD_LOGIC
+				);
+		end component;
 --		COMPONENT D_LATCH 
 --				PORT (
 --						D, CLK	: in  STD_LOGIC;
@@ -138,6 +148,7 @@ architecture Behavioral of TOP is
 		END COMPONENT;
 		
 		SIGNAL PULSE_1ms : std_logic;
+		SIGNAL BAUD_RATE : std_logic;
 		SIGNAL DIGIT_COUNTER_INTERNAL : std_logic;
 
 		SIGNAL COUNT_INTERNAL : std_logic_vector(1 downto 0);
@@ -154,7 +165,10 @@ architecture Behavioral of TOP is
 
 			clockdiv1: CLOCK_DIV
 					port map(RST=>btnr, CLK=>CLK, SPEED=>100000, S=>PULSE_1ms);
-			
+					
+			baudRateGen: CLOCK_DIV
+					port map(RST=>btnr, CLK=>CLK, SPEED=>115200, S=>BAUD_RATE);
+					
 			tbc1: TWO_BITS_COUNTER
 					port map(E=>PULSE_1ms, CLK=>CLK, S=>COUNT_INTERNAL);
 
@@ -188,9 +202,14 @@ architecture Behavioral of TOP is
 			decoder1: SEG_DECODER_DEC
 					port map(val=>DIGITS_VAL_INTERNAL, dis=>COUNT_INTERNAL, seg=>seg, an=>an);
 			
+			--Tx serial
+			serial_TX1: SERIAL_TX
+					port map(RST=>btnr, CLK=>CLK, CE_BAUD=>BAUD_RATE, ASCII_CHAR=>"01010101", TX=>JD_OUT(3));
 
+			JD_OUT(2)<=BAUD_RATE;
+			
 			Led <= COUNT_INTERNAL;
-			JD_OUT(2) <= PULSE_1ms;
+			TxD <= '1';
 			
 
 			--Ledtwo <= CLK_DIV_INTERNAL;

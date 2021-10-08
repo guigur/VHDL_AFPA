@@ -1,7 +1,7 @@
 Release 14.7 - par P.20131013 (lin64)
 Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
-Wed Oct  6 10:51:36 2021
+Thu Oct  7 17:01:53 2021
 
 
 INFO: The IO information is provided in three file formats as part of the Place and Route (PAR) process.  These formats are:
@@ -121,7 +121,7 @@ Pinout by Pin Number:
 |F9        |           |IOBS     |IO_L38N_VREF_0               |UNUSED   |           |0             |          |         |           |         |         |          |           |                |
 |F10       |JD_IN<0>   |IOB      |IO_L40N_0                    |INPUT    |LVCMOS33   |0             |          |         |           |NONE     |         |LOCATED   |NO         |NONE            |
 |F11       |JD_IN<1>   |IOB      |IO_L42P_0                    |INPUT    |LVCMOS33   |0             |          |         |           |NONE     |         |LOCATED   |NO         |NONE            |
-|F12       |           |IOBM     |IO_L51P_0                    |UNUSED   |           |0             |          |         |           |         |         |          |           |                |
+|F12       |JD_OUT<3>  |IOB      |IO_L51P_0                    |OUTPUT   |LVCMOS33   |0             |12        |SLOW     |           |         |         |LOCATED   |NO         |NONE            |
 |F13       |           |IOBM     |IO_L63P_SCP7_0               |UNUSED   |           |0             |          |         |           |         |         |          |           |                |
 |F14       |           |IOBM     |IO_L30P_A21_M1RESET_1        |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
 |F15       |           |IOBM     |IO_L1P_A25_1                 |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
@@ -252,8 +252,8 @@ Pinout by Pin Number:
 |N14       |seg<5>     |IOB      |IO_L53N_VREF_1               |OUTPUT   |LVCMOS33   |1             |12        |SLOW     |           |         |         |LOCATED   |NO         |NONE            |
 |N15       |an<1>      |IOB      |IO_L50P_M1UDQS_1             |OUTPUT   |LVCMOS33   |1             |12        |SLOW     |           |         |         |LOCATED   |NO         |NONE            |
 |N16       |an<0>      |IOB      |IO_L50N_M1UDQSN_1            |OUTPUT   |LVCMOS33   |1             |12        |SLOW     |           |         |         |LOCATED   |NO         |NONE            |
-|N17       |           |IOBM     |IO_L48P_HDC_M1DQ8_1          |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
-|N18       |           |IOBS     |IO_L48N_M1DQ9_1              |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
+|N17       |RxD        |IOB      |IO_L48P_HDC_M1DQ8_1          |INPUT    |LVCMOS33   |1             |          |         |           |NONE     |         |LOCATED   |NO         |NONE            |
+|N18       |TxD        |IOB      |IO_L48N_M1DQ9_1              |OUTPUT   |LVCMOS33   |1             |12        |SLOW     |           |         |         |LOCATED   |NO         |NONE            |
 |P1        |           |IOBS     |IO_L34N_M3UDQSN_3            |UNUSED   |           |3             |          |         |           |         |         |          |           |                |
 |P2        |           |IOBM     |IO_L34P_M3UDQS_3             |UNUSED   |           |3             |          |         |           |         |         |          |           |                |
 |P3        |           |IOBS     |IO_L2N_3                     |UNUSED   |           |3             |          |         |           |         |         |          |           |                |
